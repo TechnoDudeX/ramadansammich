@@ -216,6 +216,38 @@
     .footer-links a:hover { color:var(--bread-light); }
     .footer-copy { color:rgba(255,249,237,0.25); font-size:0.8rem; margin-top:1.5rem; font-weight:500; }
 
+    /* ─── Volunteer Form ─── */
+    .volunteer-section { background:var(--cream-dark); position:relative; overflow:hidden; }
+    .volunteer-section::before { content:''; position:absolute; top:-2px; left:0; right:0; height:60px; background:var(--cream); clip-path:ellipse(55% 100% at 50% 0%); }
+    .volunteer-form-wrap { background:var(--warm-white); border-radius:28px; padding:2.8rem; border:3px solid var(--bread-light); border-top:5px solid var(--ham); box-shadow:0 6px 0 #ffe0a0, 0 10px 32px var(--shadow-warm); margin-top:2rem; position:relative; overflow:hidden; }
+    .volunteer-form-wrap::before { content:'✋'; position:absolute; top:-10px; right:10px; font-size:6rem; opacity:0.05; transform:rotate(10deg); pointer-events:none; }
+    .form-intro { font-size:1.05rem; line-height:1.75; color:var(--brown-body); margin-bottom:2rem; font-weight:500; max-width:600px; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+    .form-group { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1.2rem; }
+    .form-group label { font-family:'Fredoka',sans-serif; font-size:1rem; font-weight:600; color:var(--brown-text); }
+    .form-group label .req { color:var(--ham-dark); margin-left:2px; }
+    .form-group input, .form-group select { font-family:'Nunito',sans-serif; font-size:0.98rem; font-weight:600; color:var(--brown-text); background:var(--cream); border:2.5px solid var(--bread-light); border-radius:14px; padding:0.85rem 1.1rem; outline:none; transition:border-color 0.25s, box-shadow 0.25s; width:100%; -webkit-appearance:none; appearance:none; }
+    .form-group input:focus, .form-group select:focus { border-color:var(--bread-dark); box-shadow:0 0 0 4px rgba(200,134,42,0.12); background:var(--warm-white); }
+    .form-group input::placeholder { color:var(--brown-light); font-weight:500; }
+    .form-group .field-hint { font-size:0.83rem; color:var(--brown-light); font-weight:500; line-height:1.5; }
+    .form-group select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b5e2a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; padding-right:2.8rem; cursor:pointer; }
+    .form-divider { margin:1.8rem 0 1.4rem; padding-bottom:1rem; border-bottom:2.5px dashed var(--bread-light); }
+    .form-divider h3 { font-family:'Fredoka',sans-serif; font-size:1.3rem; color:var(--brown-text); margin-bottom:0.3rem; }
+    .form-divider p { font-size:0.9rem; color:var(--brown-light); line-height:1.65; font-weight:500; }
+    .radio-group { display:flex; flex-direction:column; gap:0.7rem; margin-top:0.2rem; }
+    .radio-option { display:flex; align-items:center; gap:0.75rem; padding:0.85rem 1.1rem; background:var(--cream); border:2.5px solid var(--bread-light); border-radius:14px; cursor:pointer; transition:border-color 0.25s, background 0.25s; }
+    .radio-option:hover { border-color:var(--bread-dark); background:var(--warm-white); }
+    .radio-option input[type="radio"] { width:20px; height:20px; accent-color:var(--bread-dark); cursor:pointer; flex-shrink:0; }
+    .radio-option span { font-family:'Nunito',sans-serif; font-size:0.98rem; font-weight:700; color:var(--brown-text); }
+    .radio-option:has(input:checked) { border-color:var(--bread-dark); background:var(--cream-dark); }
+    .form-submit { margin-top:2rem; }
+    .btn-submit { background:var(--ham-dark); color:var(--warm-white); box-shadow:0 4px 0 #9a4050, 0 6px 16px rgba(196,110,122,0.35); font-size:1.05rem; padding:1rem 2.4rem; border:none; cursor:pointer; font-family:'Fredoka',sans-serif; font-weight:600; }
+    .btn-submit:hover { box-shadow:0 6px 0 #9a4050, 0 10px 24px rgba(196,110,122,0.4); transform:translateY(-3px); }
+    .form-success { display:none; text-align:center; padding:3rem 2rem; }
+    .form-success .success-icon { font-size:4rem; margin-bottom:1rem; }
+    .form-success h3 { font-family:'Fredoka',sans-serif; font-size:1.8rem; color:var(--brown-text); margin-bottom:0.5rem; }
+    .form-success p { color:var(--brown-light); font-size:1rem; font-weight:500; line-height:1.7; }
+
     /* ─── Responsive ─── */
     @media (max-width: 768px) {
       .nav-links { display:none; }
@@ -227,7 +259,8 @@
       .featured-grid { grid-template-columns:1fr; }
       .hero-stat-strip { gap:0.8rem; }
       .hero-stat { min-width:110px; padding:1rem 1.2rem; }
-      .story-timeline { flex-direction:column; gap:1rem; }
+      .form-row { grid-template-columns:1fr; }
+      .volunteer-form-wrap { padding:1.8rem; }
       .timeline-arrow { transform:rotate(90deg); padding:0.3rem 0; }
       .section { padding:4rem 1.5rem; }
       .hero-inner { padding:7rem 1.5rem 5rem; }
@@ -244,7 +277,7 @@
       <li><a href="#sponsor">Sponsor</a></li>
       <li><a href="#story">Our Story</a></li>
       <li><a href="#featured">Follow Us</a></li>
-      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSet3HOdKJ3U_czXEBHIptjNzwAeCp2HjdJt54KQnTdIGI4Iuw/viewform" target="_blank" class="nav-cta">Volunteer ✋</a></li>
+      <li><a href="#volunteer" class="nav-cta">Volunteer ✋</a></li>
     </ul>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </nav>
@@ -261,7 +294,7 @@
       <h1>Distributing sammiches to shelters across <em>the GTA</em></h1>
       <p class="hero-sub">A community-driven initiative that assembles and delivers meals to local shelters every Ramadan. One sammich at a time.</p>
       <div class="hero-actions">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSet3HOdKJ3U_czXEBHIptjNzwAeCp2HjdJt54KQnTdIGI4Iuw/viewform" target="_blank" class="btn btn-primary">✋ Volunteer With Us</a>
+        <a href="#volunteer" class="btn btn-primary">✋ Volunteer With Us</a>
         <a href="https://www.launchgood.com/v4/campaign/ramadan_sammich_2025__distributing_meals_to_shelters_across_the_gta_1" target="_blank" class="btn btn-secondary">Donate via LaunchGood →</a>
       </div>
       <div class="hero-stat-strip">
@@ -282,7 +315,7 @@
         <div class="what-text fade-up">
           <p><span class="highlight">Ramadan Sammich</span> is a community-driven initiative that assembles and distributes meals to local shelters in the GTA every Ramadan.</p>
           <p>Volunteers gather weekly to prepare and deliver <span class="highlight">200 meals per run</span>, fostering community, support, and giving back during the holiest month of the year.</p>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSet3HOdKJ3U_czXEBHIptjNzwAeCp2HjdJt54KQnTdIGI4Iuw/viewform" target="_blank" class="btn btn-primary" style="margin-top:0.5rem;">Join Our Next Run →</a>
+          <a href="#volunteer" class="btn btn-primary" style="margin-top:0.5rem;">Join Our Next Run →</a>
         </div>
         <div class="sammich-card fade-up">
           <h3>What's In A Sammich?</h3>
@@ -427,6 +460,97 @@
     </div>
   </section>
 
+  <!-- Volunteer Form -->
+  <section class="section volunteer-section" id="volunteer">
+    <div class="section-inner">
+      <div class="section-label fade-up">✋ Volunteer Sign-Up</div>
+      <h2 class="fade-up">Join us this <em>Ramadan</em></h2>
+      <div class="volunteer-form-wrap fade-up">
+        <p class="form-intro">We'd love to have you on the team! Fill out the form below and we'll be in touch with details about upcoming sammich-making runs near you.</p>
+
+        <form name="volunteer" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="volunteer">
+          <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+
+          <!-- Name row -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first_name">First Name <span class="req">*</span></label>
+              <input type="text" id="first_name" name="first_name" placeholder="e.g. Fatima" required>
+            </div>
+            <div class="form-group">
+              <label for="last_name">Last Name <span class="req">*</span></label>
+              <input type="text" id="last_name" name="last_name" placeholder="e.g. Khan" required>
+            </div>
+          </div>
+
+          <!-- Contact row -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email <span class="req">*</span></label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number <span class="req">*</span></label>
+              <input type="tel" id="phone" name="phone" placeholder="e.g. 647-555-0123" required>
+              <span class="field-hint">Preferably a cell phone number that we can reach you at.</span>
+            </div>
+          </div>
+
+          <!-- Demographic divider -->
+          <div class="form-divider">
+            <h3>📋 Demographic Info</h3>
+            <p>The following information helps us plan future runs in a way that is accessible to all of our volunteer base.</p>
+          </div>
+
+          <!-- Age + Region row -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="age">Your Age <span class="req">*</span></label>
+              <input type="number" id="age" name="age" placeholder="e.g. 24" min="5" max="100" required>
+            </div>
+            <div class="form-group">
+              <label for="region">Region of Residence <span class="req">*</span></label>
+              <select id="region" name="region" required>
+                <option value="" disabled selected>Select your region</option>
+                <option>Toronto (Downtown / Central)</option>
+                <option>North York</option>
+                <option>Scarborough</option>
+                <option>Etobicoke</option>
+                <option>Mississauga</option>
+                <option>Brampton</option>
+                <option>Markham / Richmond Hill</option>
+                <option>Vaughan / Woodbridge</option>
+                <option>Oakville / Burlington</option>
+                <option>Ajax / Pickering / Durham</option>
+                <option>Other GTA</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Sign-up type -->
+          <div class="form-group">
+            <label>Are you signing up as an individual or for your family? <span class="req">*</span></label>
+            <div class="radio-group">
+              <label class="radio-option">
+                <input type="radio" name="signup_type" value="Individual" required>
+                <span>Individual</span>
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="signup_type" value="Family">
+                <span>Signing up for my family</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn btn-submit">🥪 Submit — I'm In!</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- Final CTA -->
   <section class="cta-section">
     <div class="cta-doodles"></div>
@@ -434,7 +558,7 @@
       <h2 class="fade-up">Help us make a difference <em>this&nbsp;Ramadan</em> 🤲</h2>
       <p class="fade-up">Whether you volunteer your time or contribute to our supply fund, every bit helps us deliver more meals to those who need them most.</p>
       <div class="cta-buttons fade-up">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSet3HOdKJ3U_czXEBHIptjNzwAeCp2HjdJt54KQnTdIGI4Iuw/viewform" target="_blank" class="btn btn-cta-primary">✋ Volunteer</a>
+        <a href="#volunteer" class="btn btn-cta-primary">✋ Volunteer</a>
         <a href="https://www.launchgood.com/v4/campaign/ramadan_sammich_2025__distributing_meals_to_shelters_across_the_gta_1" target="_blank" class="btn btn-cta-outline">Donate via LaunchGood</a>
         <a href="https://www.paypal.com/paypalme/MuneebChaudhary?fbclid=PAZXh0bgNhZW0CMTEAAaaiukGgJ0Q1-8jTU7b2w13dne6kriFzpnHJ0bHl-sTzsYCgJ6gFgw0O2KU_aem_zdW4Crn4gY4inMLSCfWCKA" target="_blank" class="btn btn-cta-outline">Donate via PayPal</a>
       </div>
@@ -448,7 +572,7 @@
       <div class="footer-links">
         <a href="https://www.instagram.com/ramadansammich/" target="_blank">Instagram</a>
         <a href="https://www.facebook.com/RamadanSammich" target="_blank">Facebook</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSet3HOdKJ3U_czXEBHIptjNzwAeCp2HjdJt54KQnTdIGI4Iuw/viewform" target="_blank">Volunteer</a>
+        <a href="#volunteer">Volunteer</a>
         <a href="https://www.launchgood.com/v4/campaign/ramadan_sammich_2025__distributing_meals_to_shelters_across_the_gta_1" target="_blank">LaunchGood</a>
         <a href="https://www.paypal.com/paypalme/MuneebChaudhary" target="_blank">PayPal</a>
       </div>
