@@ -9,6 +9,8 @@
   <meta property="og:description" content="Distributing sammiches to shelters across the GTA every Ramadan since 2012.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ramadansammich.ca">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
@@ -329,17 +331,17 @@
       font-size: clamp(1.8rem, 4vw, 2.8rem);
       color: var(--brown-text);
       line-height: 1.2;
-      max-width: 600px;
+      max-width: 100%;
     }
     .section h2 em { font-style: normal; color: var(--bread-dark); }
 
     /* ─── What We Do ─── */
     .what-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 2.5rem;
       margin-top: 2.5rem;
-      align-items: start;
+      max-width: 750px;
     }
     .what-text p { font-size: 1.08rem; line-height: 1.8; color: var(--brown-body); margin-bottom: 1.2rem; font-weight: 500; }
     .what-text .highlight { background: var(--bread-light); padding: 0.1em 0.35em; border-radius: 6px; font-weight: 700; color: var(--crust); }
@@ -352,6 +354,7 @@
       box-shadow: 0 6px 0 var(--cream-dark), 0 8px 24px var(--shadow-warm);
       position: relative;
       overflow: hidden;
+      max-width: 480px;
     }
     .sammich-card::before { content: '🥪'; position: absolute; top: -15px; right: -5px; font-size: 5rem; opacity: 0.08; transform: rotate(15deg); }
     .sammich-card h3 { font-size: 1.4rem; color: var(--brown-text); margin-bottom: 1.2rem; }
@@ -413,15 +416,18 @@
       background-size: 30px 30px;
     }
     .story-inner { position: relative; z-index: 2; }
-    .story-timeline { display: flex; gap: 1.5rem; margin-top: 2.5rem; overflow-x: auto; padding-bottom: 1rem; -webkit-overflow-scrolling: touch; }
+    .story-timeline {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
     .timeline-card {
-      min-width: 240px;
       background: rgba(255,255,255,0.08);
       border: 2.5px solid rgba(255,255,255,0.12);
       border-radius: 20px;
       padding: 1.8rem;
       transition: transform 0.3s, background 0.3s;
-      flex-shrink: 0;
     }
     .timeline-card:hover { transform: translateY(-5px) rotate(-1deg); background: rgba(255,255,255,0.14); }
     .timeline-year { font-family: 'Fredoka', sans-serif; font-size: 2.4rem; font-weight: 700; color: var(--bread-light); line-height: 1; }
@@ -529,8 +535,7 @@
       .featured-grid { grid-template-columns: 1fr; }
       .hero-stat-strip { gap: 0.8rem; }
       .hero-stat { min-width: 110px; padding: 1rem 1.2rem; }
-      .story-timeline { flex-direction: column; }
-      .timeline-card { min-width: auto; }
+      .story-timeline { grid-template-columns: 1fr; }
       .section { padding: 4rem 1.5rem; }
       .hero-inner { padding: 7rem 1.5rem 5rem; }
     }
@@ -540,7 +545,7 @@
 
   <!-- Nav -->
   <nav id="nav">
-    <a href="#" class="nav-logo"><img src="logo.png" alt="Ramadan Sammich"></a>
+    <a href="#" class="nav-logo"><img src="icon.png" alt="Ramadan Sammich"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#story">Our Story</a></li>
@@ -646,7 +651,7 @@
       <h2 class="fade-up">See the <em>impact</em> in action</h2>
       <div class="featured-grid">
         <div class="ig-embed-wrap fade-up">
-          <blockquote class="instagram-media" data-instgrm-captioned data-instgrm-permalink="https://www.instagram.com/p/DGy1GRxx13w/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 0; max-width:540px; min-width:326px; padding:0; width:calc(100% - 2px);">
+          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DGy1GRxx13w/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin: 0; max-width:540px; min-width:326px; padding:0; width:calc(100% - 2px);">
             <div style="padding:16px;">
               <a href="https://www.instagram.com/p/DGy1GRxx13w/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank">
                 <div style="display:flex; flex-direction:row; align-items:center;">
