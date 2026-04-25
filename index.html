@@ -321,8 +321,35 @@
 
   /* ABOUT */
   .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start; }
+  .about-left { display: flex; flex-direction: column; gap: 36px; }
   .about-text { font-family: 'Fraunces', serif; font-size: clamp(20px, 2.4vw, 26px); line-height: 1.35; color: var(--ink); font-weight: 400; }
   .about-text .accent { color: var(--accent); font-style: italic; }
+
+  .how-steps { display: grid; grid-template-columns: 1fr; gap: 14px; }
+  .how-step {
+    position: relative;
+    background: var(--paper); border: 2.5px solid var(--ink); border-radius: 18px;
+    padding: 18px 22px 18px 70px;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .how-step:nth-child(1) { transform: rotate(-1deg); }
+  .how-step:nth-child(2) { transform: rotate(0.8deg); }
+  .how-step:nth-child(3) { transform: rotate(-0.6deg); }
+  .how-step:hover { transform: rotate(0deg) translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+  .how-step .step-num {
+    position: absolute; top: 50%; left: 16px; transform: translateY(-50%) rotate(-6deg);
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--accent); color: var(--paper);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 600; font-size: 18px;
+    border: 2.5px solid var(--ink);
+    box-shadow: 0 2px 0 var(--ink);
+  }
+  .how-step:nth-child(2) .step-num { background: var(--accent-2); color: var(--ink); }
+  .how-step:nth-child(3) .step-num { background: var(--accent-3); }
+  .how-step h4 { font-size: 17px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+  .how-step p { font-size: 14px; line-height: 1.55; color: var(--ink-2); margin-top: 4px; font-weight: 500; }
 
   .recipe-card {
     background: var(--paper); border: 2.5px solid var(--ink); border-radius: 22px;
@@ -748,9 +775,28 @@
     </p>
   </div>
   <div class="about-grid">
-    <p class="about-text">
-      A bag of food is small. <span class="accent">A bag of food shows up every week, for thirteen years</span>, and it becomes something else entirely — a habit of care 🤲, a piece of a community, a way of belonging to your city.
-    </p>
+    <div class="about-left">
+      <p class="about-text">
+        A bag of food is small. <span class="accent">A bag of food shows up every week, for thirteen years</span>, and it becomes something else entirely — a habit of care 🤲, a piece of a community, a way of belonging to your city.
+      </p>
+      <div class="how-steps">
+        <div class="how-step">
+          <div class="step-num">01</div>
+          <h4>🛒 Prep</h4>
+          <p>Volunteers shop, slice, and lay out 200 portions on long folding tables — bread, bologna, cheese, the works.</p>
+        </div>
+        <div class="how-step">
+          <div class="step-num">02</div>
+          <h4>🥪 Pack</h4>
+          <p>Assembly-line style: a sammich gets built, sealed, paired with a clementine, juice, and snack — all in a paper bag.</p>
+        </div>
+        <div class="how-step">
+          <div class="step-num">03</div>
+          <h4>🚐 Deliver</h4>
+          <p>Cars load up and fan out across the GTA, dropping bags at shelters before iftar. Same time, same care, every week.</p>
+        </div>
+      </div>
+    </div>
     <div class="recipe-card">
       <div class="tape pink tape-r" aria-hidden="true"></div>
       <div class="recipe-header">
