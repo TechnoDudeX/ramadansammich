@@ -1,692 +1,1270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ramadan Sammich — Feeding the GTA, One Sammich at a Time</title>
-  <meta name="description" content="A community-driven initiative assembling and distributing meals to local shelters across the GTA every Ramadan. Since 2012.">
-  <meta property="og:title" content="Ramadan Sammich">
-  <meta property="og:description" content="Distributing sammiches to shelters across the GTA every Ramadan since 2012.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ramadansammich.ca">
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bread-light: #f5dfa0;
-      --bread: #e8b84b;
-      --bread-dark: #c8862a;
-      --crust: #8b5e2a;
-      --ham: #e8909a;
-      --ham-dark: #c46e7a;
-      --lettuce: #6ec25b;
-      --lettuce-dark: #4a9a3a;
-      --cheese: #f0c84a;
-      --cream: #fff9ed;
-      --cream-dark: #fff0d4;
-      --warm-white: #fffcf5;
-      --brown-text: #4a2c0a;
-      --brown-body: #6b4420;
-      --brown-light: #9a7048;
-      --orange-pop: #f0883a;
-      --shadow-warm: rgba(139, 94, 42, 0.12);
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#fff4dc" />
+<title>Ramadan Sammich — Feeding the GTA, One Sammich at a Time</title>
+<meta name="description" content="A community-driven initiative assembling and delivering meals to local shelters across the Greater Toronto Area every Ramadan. Since 2012." />
+<meta property="og:title" content="Ramadan Sammich" />
+<meta property="og:description" content="Distributing sammiches to shelters across the GTA every Ramadan since 2012." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://ramadansammich.ca" />
+<meta property="og:image" content="https://ramadansammich.ca/icon.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Ramadan Sammich" />
+<meta name="twitter:description" content="Distributing sammiches to shelters across the GTA every Ramadan since 2012." />
+<meta name="twitter:image" content="https://ramadansammich.ca/icon.png" />
+<link rel="canonical" href="https://ramadansammich.ca/" />
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="apple-touch-icon" href="icon.png" />
+<link rel="preload" as="image" href="logo.png" fetchpriority="high" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #fff4dc;
+    --bg-2: #ffe8b8;
+    --paper: #fffaec;
+    --ink: #3a2412;
+    --ink-2: #6b4420;
+    --ink-3: #a07d52;
+    --rule: #e8c98a;
+    --accent: #e8553a;
+    --accent-2: #f0b22e;
+    --accent-3: #6dba48;
+    --accent-4: #4a3520;
+    --pink: #f0a8b4;
+    --tape: #f8d77a;
+    --shadow: rgba(74, 53, 32, 0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ink-2);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+
+  h1, h2, h3, h4 {
+    font-family: 'Fraunces', Georgia, serif;
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+  h1 { font-weight: 500; }
+  .mono { font-family: 'DM Mono', ui-monospace, monospace; }
+
+  ::selection { background: var(--accent-2); color: var(--ink); }
+
+  /* paper grain + dotted backdrop */
+  body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(74,53,32,0.05) 0, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(232,85,58,0.04) 0, transparent 45%),
+      radial-gradient(circle, rgba(74,53,32,0.08) 1px, transparent 1.5px);
+    background-size: auto, auto, 22px 22px;
+    mix-blend-mode: multiply;
+    opacity: 0.7;
+  }
+  #app { position: relative; z-index: 1; }
+
+  /* Crafty primitives */
+  .tape {
+    position: absolute; width: 90px; height: 22px;
+    background: var(--tape); opacity: 0.78;
+    box-shadow: 0 1px 2px rgba(74,53,32,0.18);
+    transform: rotate(-4deg);
+  }
+  .tape::before, .tape::after {
+    content: ''; position: absolute; top: 0; bottom: 0; width: 6px;
+    background-image: linear-gradient(135deg, transparent 50%, rgba(255,255,255,0.5) 50%);
+    background-size: 6px 6px;
+  }
+  .tape::before { left: 0; }
+  .tape::after { right: 0; transform: scaleX(-1); }
+  .tape.pink { background: var(--pink); }
+  .tape.green { background: #b8e08a; }
+
+  .sticker {
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 50%; background: var(--accent); color: var(--paper);
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 500;
+    box-shadow: 0 4px 0 rgba(74,53,32,0.18), 0 6px 14px rgba(232,85,58,0.3);
+    transform: rotate(-8deg);
+    text-align: center; line-height: 1.05;
+    border: 3px dashed rgba(255,255,255,0.7);
+  }
+
+  /* NAV */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px;
+    transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s;
+    border-bottom: 1.5px solid transparent;
+  }
+  .nav.scrolled {
+    background: color-mix(in oklab, var(--paper) 92%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1.5px solid var(--rule);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); transition: transform 0.3s; }
+  .nav-brand:hover { transform: rotate(-2deg) scale(1.03); }
+  .nav-brand img { height: 36px; width: auto; }
+  .nav-brand .wm { font-family: 'Fraunces', serif; font-weight: 600; font-size: 18px; letter-spacing: -0.02em; font-style: italic; }
+  .nav-brand .wm em { font-style: normal; color: var(--accent); }
+  .nav-links { display: flex; gap: 4px; align-items: center; list-style: none; }
+  .nav-links a {
+    color: var(--ink-2); text-decoration: none; font-size: 14px; font-weight: 600;
+    padding: 8px 14px; border-radius: 999px; transition: background 0.2s, color 0.2s, transform 0.2s;
+  }
+  .nav-links a:hover { background: var(--bg-2); color: var(--ink); transform: translateY(-1px); }
+  .nav-cta {
+    background: var(--accent) !important; color: var(--paper) !important;
+    padding: 10px 18px !important; font-weight: 700 !important;
+    box-shadow: 0 3px 0 var(--accent-4), 0 5px 12px rgba(232,85,58,0.3);
+    transition: transform 0.2s, box-shadow 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--accent) !important; color: var(--paper) !important; transform: translateY(-2px) rotate(-1deg) !important; box-shadow: 0 5px 0 var(--accent-4), 0 8px 18px rgba(232,85,58,0.4) !important; }
+
+  .nav-toggle {
+    display: none; background: var(--paper); border: 2px solid var(--ink);
+    width: 42px; height: 42px; border-radius: 12px; cursor: pointer; padding: 0;
+    align-items: center; justify-content: center;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .nav-toggle span {
+    display: block; width: 18px; height: 2.5px; background: var(--ink); border-radius: 2px;
+    position: relative;
+  }
+  .nav-toggle span::before, .nav-toggle span::after {
+    content: ''; position: absolute; left: 0; width: 18px; height: 2.5px; background: var(--ink); border-radius: 2px;
+  }
+  .nav-toggle span::before { top: -6px; }
+  .nav-toggle span::after  { top: 6px; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh; padding: 120px 24px 60px; position: relative;
+    display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px;
+    max-width: 1320px; margin: 0 auto; align-items: center;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: 12%; left: -40px; width: 80px; height: 80px;
+    background: var(--accent-2); border-radius: 50%; opacity: 0.4;
+    animation: floatSlow 8s ease-in-out infinite;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: 18%; right: -30px; width: 60px; height: 60px;
+    background: var(--pink); border-radius: 50%; opacity: 0.5;
+    animation: floatSlow 10s ease-in-out 1s infinite;
+  }
+  @keyframes floatSlow {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-14px) rotate(8deg); }
+  }
+  @keyframes wiggle {
+    0%,100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+  @keyframes bob {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 600;
+    color: var(--ink); text-transform: uppercase; letter-spacing: 0.12em;
+    padding: 8px 14px; border: 2px dashed var(--accent); border-radius: 999px;
+    background: var(--paper);
+    transform: rotate(-1deg);
+  }
+  .eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.4); } }
+
+  .hero h1 {
+    font-size: clamp(40px, 6.5vw, 92px);
+    line-height: 0.98; margin-top: 22px;
+    letter-spacing: -0.035em;
+  }
+  .hero h1 .it { font-style: italic; font-weight: 500; color: var(--accent); }
+  .hero h1 .underline { position: relative; display: inline-block; }
+  .hero h1 .underline svg {
+    position: absolute; left: -6px; right: -6px; bottom: -10px; width: calc(100% + 12px); height: 18px;
+    color: var(--accent-2);
+  }
+
+  .hero-sub {
+    margin-top: 24px; font-size: 17px; line-height: 1.6; color: var(--ink-2);
+    max-width: 540px; font-weight: 500;
+  }
+  .hero-cta { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; align-items: center; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 22px; border-radius: 999px; font-size: 15px; font-weight: 700;
+    text-decoration: none; cursor: pointer; border: none; font-family: inherit;
+    transition: transform 0.2s, background 0.2s, color 0.2s, box-shadow 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .btn-primary { background: var(--accent); color: white; box-shadow: 0 4px 0 var(--accent-4), 0 6px 14px rgba(232,85,58,0.3); }
+  .btn-primary:hover { transform: translateY(-3px) rotate(-1deg); box-shadow: 0 7px 0 var(--accent-4), 0 10px 22px rgba(232,85,58,0.4); }
+  .btn-ghost { background: var(--paper); color: var(--ink); border: 2.5px solid var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  .btn-ghost:hover { transform: translateY(-3px) rotate(1deg); box-shadow: 0 7px 0 var(--ink); }
+  .btn-accent { background: var(--accent-3); color: white; box-shadow: 0 4px 0 #4a7d2a, 0 6px 14px rgba(109,186,72,0.35); }
+  .btn-accent:hover { transform: translateY(-3px); box-shadow: 0 7px 0 #4a7d2a, 0 10px 22px rgba(109,186,72,0.45); }
+
+  .hero-sticker {
+    width: 110px; height: 110px; font-size: 14px; padding: 12px;
+    animation: wiggle 4s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  .hero-art {
+    position: relative; aspect-ratio: 1; max-width: 520px; margin-left: auto; width: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-art .tape-1 { position: absolute; top: -10px; left: 30px; z-index: 5; transform: rotate(-6deg); }
+  .hero-art .tape-2 { position: absolute; bottom: -8px; right: 24px; z-index: 5; transform: rotate(4deg); }
+  .stack-tag {
+    position: absolute; top: 22px; left: 22px;
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em;
+    color: var(--ink-3); text-transform: uppercase;
+    z-index: 2;
+  }
+  .stack-tag-r {
+    position: absolute; top: 22px; right: 22px;
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    color: var(--accent); font-weight: 700;
+    z-index: 2;
+  }
+
+  .hero-logo-frame {
+    position: absolute; inset: 0;
+    background: var(--paper);
+    border: 2.5px solid var(--ink);
+    border-radius: 24px;
+    box-shadow: 8px 8px 0 var(--accent-4), 0 20px 50px var(--shadow);
+    overflow: hidden;
+    transform: rotate(-1.5deg);
+    display: flex; align-items: center; justify-content: center;
+    padding: 64px 28px 56px;
+  }
+  .hero-logo-frame::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(45deg, transparent 0, transparent 22px, rgba(74,53,32,0.05) 22px, rgba(74,53,32,0.05) 23px),
+      radial-gradient(circle at 30% 40%, rgba(255,210,108,0.25), transparent 60%),
+      radial-gradient(circle at 75% 70%, rgba(232,144,154,0.18), transparent 55%);
+    opacity: 0.75;
+    pointer-events: none;
+  }
+  .hero-logo-img {
+    position: relative; z-index: 1;
+    width: 100%; height: auto; max-height: 78%;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 0 rgba(74,53,32,0.12));
+    animation: bob 5s ease-in-out infinite;
+  }
+  .hero-logo-frame .stack-stat {
+    position: absolute; bottom: 18px; left: 22px; right: 22px;
+    display: flex; justify-content: space-between; gap: 12px;
+    font-family: 'DM Mono', monospace; font-size: 11px;
+    color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.08em;
+    z-index: 2;
+  }
+
+  /* METRICS */
+  .metrics {
+    max-width: 1320px; margin: 0 auto; padding: 16px 24px 40px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+  }
+  .metric {
+    padding: 24px 20px; background: var(--paper);
+    border: 2.5px solid var(--ink); border-radius: 18px;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .metric:nth-child(1) { transform: rotate(-1.5deg); }
+  .metric:nth-child(2) { transform: rotate(1deg); }
+  .metric:nth-child(3) { transform: rotate(-0.5deg); }
+  .metric:nth-child(4) { transform: rotate(1.5deg); }
+  .metric:hover { transform: rotate(0deg) translateY(-4px); box-shadow: 6px 8px 0 var(--ink); }
+  .metric:nth-child(1)::after { content: ''; position: absolute; top: 12px; right: 12px; width: 16px; height: 16px; background: var(--pink); border-radius: 50%; border: 2px solid var(--ink); }
+  .metric:nth-child(2)::after { content: ''; position: absolute; top: 12px; right: 12px; width: 16px; height: 16px; background: var(--accent-3); border-radius: 50%; border: 2px solid var(--ink); }
+  .metric:nth-child(3)::after { content: ''; position: absolute; top: 12px; right: 12px; width: 16px; height: 16px; background: var(--accent-2); border-radius: 50%; border: 2px solid var(--ink); }
+  .metric:nth-child(4)::after { content: ''; position: absolute; top: 12px; right: 12px; width: 16px; height: 16px; background: var(--accent); border-radius: 50%; border: 2px solid var(--ink); }
+  .metric-num { font-family: 'Fraunces', serif; font-size: clamp(36px, 5vw, 52px); font-weight: 600; color: var(--ink); line-height: 1; letter-spacing: -0.03em; }
+  .metric-num .it { font-style: italic; font-weight: 500; color: var(--accent); }
+  .metric-label { margin-top: 10px; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+
+  /* SECTIONS */
+  .section { max-width: 1320px; margin: 0 auto; padding: 90px 24px; }
+  .section-head { display: flex; align-items: end; justify-content: space-between; gap: 32px; margin-bottom: 40px; flex-wrap: wrap; }
+  .section-num { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px; }
+  .section h2 { font-size: clamp(32px, 4.5vw, 60px); line-height: 1.02; letter-spacing: -0.025em; max-width: 700px; }
+  .section h2 .it { font-style: italic; color: var(--accent); font-weight: 400; }
+  .section-lead { max-width: 360px; font-size: 16px; line-height: 1.6; color: var(--ink-2); }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 56px; align-items: start; }
+  .about-text { font-family: 'Fraunces', serif; font-size: clamp(20px, 2.4vw, 26px); line-height: 1.35; color: var(--ink); font-weight: 400; }
+  .about-text .accent { color: var(--accent); font-style: italic; }
+
+  .recipe-card {
+    background: var(--paper); border: 2.5px solid var(--ink); border-radius: 22px;
+    padding: 28px; box-shadow: 6px 6px 0 var(--accent-2);
+    position: relative;
+    transform: rotate(1deg);
+  }
+  .recipe-card .tape-r { position: absolute; top: -10px; left: 30px; transform: rotate(-4deg); z-index: 3; }
+  .recipe-header { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; border-bottom: 2.5px dashed var(--ink); margin-bottom: 14px; gap: 12px; flex-wrap: wrap; }
+  .recipe-title { font-family: 'Fraunces', serif; font-size: 22px; color: var(--ink); font-style: italic; }
+  .recipe-meta { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+  .recipe-list { display: flex; flex-direction: column; }
+  .recipe-row {
+    display: grid; grid-template-columns: 28px 1fr auto; gap: 14px;
+    padding: 12px 0; border-bottom: 1.5px dashed var(--rule); align-items: center;
+    transition: padding 0.2s, background 0.2s;
+  }
+  .recipe-row:last-child { border-bottom: none; }
+  .recipe-row:hover { padding-left: 6px; background: var(--bg-2); border-radius: 8px; }
+  .recipe-divider {
+    margin: 12px 0 4px;
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'DM Mono', monospace; font-size: 10.5px;
+    color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700;
+  }
+  .recipe-divider::before, .recipe-divider::after {
+    content: ''; flex: 1; height: 0;
+    border-top: 1.5px dotted var(--rule);
+  }
+  .recipe-num { font-family: 'DM Mono', monospace; font-size: 14px; color: var(--accent); font-weight: 700; }
+  .recipe-name { font-size: 15px; font-weight: 700; color: var(--ink); }
+  .recipe-name .desc { display: block; font-size: 12.5px; color: var(--ink-2); font-weight: 500; margin-top: 2px; }
+  .recipe-price { font-family: 'DM Mono', monospace; font-size: 14px; color: var(--ink); font-weight: 700; }
+  .recipe-total { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; margin-top: 12px; background: var(--ink); color: var(--paper); border-radius: 14px; font-family: 'Fraunces', serif; gap: 12px; }
+  .recipe-total .label { font-size: 13px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-2); font-weight: 700; }
+  .recipe-total .price { font-size: 32px; font-weight: 600; color: var(--accent-2); font-style: italic; }
+
+  /* SPONSOR */
+  .sponsor-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: stretch; max-width: 760px; margin: 0 auto; }
+  .calc {
+    background: var(--ink); color: var(--paper); border-radius: 24px; padding: 36px;
+    position: relative; overflow: hidden;
+    border: 2.5px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--accent-2);
+    transform: rotate(-0.8deg);
+  }
+  .calc .tape-c { position: absolute; top: -10px; right: 50px; transform: rotate(8deg); z-index: 4; }
+  .calc::before {
+    content: ''; position: absolute; top: -50%; right: -20%; width: 70%; aspect-ratio: 1;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 60%);
+    opacity: 0.25; pointer-events: none;
+  }
+  .calc-eyebrow { font-family: 'DM Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.7; }
+  .calc h3 { color: var(--paper); font-size: clamp(24px, 3.4vw, 32px); margin-top: 12px; line-height: 1.1; max-width: 360px; }
+  .calc h3 .it { color: var(--accent-2); font-style: italic; font-weight: 400; }
+
+  .calc-bigvalue { display: flex; align-items: baseline; gap: 12px; margin-top: 32px; position: relative; z-index: 1; flex-wrap: wrap; }
+  .calc-bigvalue .num { font-family: 'Fraunces', serif; font-size: clamp(64px, 10vw, 96px); font-weight: 500; line-height: 1; letter-spacing: -0.04em; }
+  .calc-bigvalue .lab { font-family: 'DM Mono', monospace; font-size: 13px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.08em; }
+
+  .calc-row {
+    display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid rgba(251,243,223,0.15);
+    font-family: 'DM Mono', monospace; font-size: 13px; gap: 12px;
+  }
+  .calc-row:last-of-type { border-bottom: none; }
+  .calc-row .v { font-family: 'Fraunces', serif; font-size: 18px; font-weight: 500; }
+
+  .calc-slider-wrap { margin-top: 28px; position: relative; z-index: 1; }
+  .calc-slider {
+    -webkit-appearance: none; appearance: none; width: 100%; height: 4px;
+    background: rgba(251,243,223,0.2); border-radius: 2px; outline: none; cursor: pointer;
+  }
+  .calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none; width: 28px; height: 28px; border-radius: 50%;
+    background: var(--accent-2); border: 4px solid var(--ink); cursor: pointer;
+    box-shadow: 0 0 0 1.5px var(--accent-2);
+    transition: transform 0.15s;
+  }
+  .calc-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+  .calc-slider::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: var(--accent-2); border: 4px solid var(--ink); cursor: pointer; }
+  .calc-slider-marks { display: flex; justify-content: space-between; margin-top: 12px; font-family: 'DM Mono', monospace; font-size: 11px; opacity: 0.5; }
+  .calc-presets { display: flex; gap: 8px; margin-top: 18px; flex-wrap: wrap; position: relative; z-index: 1; }
+  .calc-preset {
+    background: rgba(251,243,223,0.08); color: var(--paper); border: 1px solid rgba(251,243,223,0.2);
+    padding: 8px 14px; border-radius: 999px; font-size: 12px; font-family: 'DM Mono', monospace;
+    cursor: pointer; transition: all 0.2s; -webkit-tap-highlight-color: transparent;
+  }
+  .calc-preset:hover { background: rgba(251,243,223,0.18); }
+  .calc-preset.on { background: var(--accent-2); color: var(--ink); border-color: var(--accent-2); }
+
+  /* TIMELINE */
+  .timeline-section { padding: 90px 0; background: var(--accent-4); color: var(--paper); position: relative; overflow: hidden; }
+  .timeline-section::before {
+    content: ''; position: absolute; inset: 0; opacity: 0.08;
+    background-image: radial-gradient(circle, var(--accent-2) 1.5px, transparent 1.5px);
+    background-size: 26px 26px;
+  }
+  .timeline-section::after {
+    content: ''; position: absolute; top: 30px; right: 8%; width: 80px; height: 80px;
+    background: var(--accent-2); border-radius: 50%; border: 3px solid var(--paper); opacity: 0.5;
+    animation: floatSlow 8s ease-in-out infinite;
+  }
+  .timeline-inner { max-width: 1320px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  .timeline-section h2 { color: var(--paper); }
+  .timeline-section .section-num { color: var(--accent-2); font-weight: 700; }
+  .timeline-section .section-lead { color: rgba(255,250,236,0.85); font-weight: 500; }
+  .timeline-section h2 .it { color: var(--accent-2); }
+  .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .timeline-card {
+    padding: 22px; background: rgba(255,250,236,0.06); border: 2.5px dashed rgba(255,250,236,0.3);
+    border-radius: 18px; transition: transform 0.3s, background 0.3s;
+  }
+  .timeline-card:nth-child(1) { transform: rotate(-1.5deg); }
+  .timeline-card:nth-child(2) { transform: rotate(1deg); }
+  .timeline-card:nth-child(3) { transform: rotate(-0.5deg); }
+  .timeline-card:nth-child(4) { transform: rotate(1.5deg); }
+  .timeline-card:hover { transform: rotate(0deg) translateY(-6px); background: rgba(255,250,236,0.12); border-style: solid; }
+  .timeline-card .yr { font-family: 'Fraunces', serif; font-size: clamp(40px, 5vw, 56px); font-weight: 600; line-height: 1; letter-spacing: -0.03em; color: var(--paper); }
+  .timeline-card .yr .it { font-style: italic; color: var(--accent-2); font-weight: 500; }
+  .timeline-card h4 { color: var(--paper); font-size: 18px; margin-top: 16px; font-weight: 600; }
+  .timeline-card p { font-size: 14px; line-height: 1.6; color: rgba(255,250,236,0.7); margin-top: 8px; font-weight: 500; }
+  .timeline-card .bullet { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--paper); margin: 12px 0 0; }
+
+  /* VOLUNTEER FORM */
+  .form-section { padding: 90px 24px; max-width: 980px; margin: 0 auto; }
+  .form-card {
+    background: var(--paper); border: 2.5px solid var(--ink); border-radius: 24px;
+    padding: 40px; box-shadow: 8px 8px 0 var(--accent);
+    position: relative; overflow: visible;
+    transform: rotate(-0.5deg);
+  }
+  .form-card::before {
+    content: ''; position: absolute; top: -16px; left: 60px; width: 110px; height: 26px;
+    background: var(--tape); transform: rotate(-3deg); opacity: 0.85;
+    box-shadow: 0 1px 2px rgba(74,53,32,0.18);
+  }
+  .form-progress { display: flex; gap: 4px; margin-bottom: 28px; }
+  .form-progress-bar { flex: 1; height: 3px; background: var(--rule); border-radius: 2px; transition: background 0.3s; }
+  .form-progress-bar.active { background: var(--accent); }
+  .form-progress-bar.done { background: var(--ink); }
+  .form-step-label { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px; }
+  .form-card h3 { font-size: clamp(26px, 4vw, 32px); line-height: 1.1; margin-bottom: 8px; }
+  .form-card h3 .it { font-style: italic; color: var(--accent); font-weight: 400; }
+  .form-card .subtitle { color: var(--ink-3); font-size: 15px; margin-bottom: 28px; line-height: 1.5; max-width: 480px; }
+
+  .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+  .field label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.1em; }
+  .field input, .field select {
+    background: var(--bg); border: 2.5px solid var(--ink); border-radius: 14px;
+    padding: 14px 16px; font-size: 16px; font-family: inherit; color: var(--ink); font-weight: 600;
+    outline: none; transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    -webkit-appearance: none; appearance: none; width: 100%;
+  }
+  .field input:focus, .field select:focus { background: var(--paper); box-shadow: 4px 4px 0 var(--accent); transform: translate(-2px, -2px); }
+  .field input::placeholder { color: var(--ink-3); }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field-hint { font-size: 12px; color: var(--ink-3); margin-top: 2px; line-height: 1.5; }
+  .field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238c6f4d' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 44px; }
+
+  .radio-stack { display: flex; flex-direction: column; gap: 8px; }
+  .radio-card {
+    padding: 18px 22px; background: var(--bg); border: 2.5px solid var(--ink);
+    border-radius: 14px; cursor: pointer; transition: all 0.2s;
+    display: flex; align-items: center; gap: 14px;
+    box-shadow: 3px 3px 0 var(--ink);
+    width: 100%; font-family: inherit; text-align: left;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .radio-card:hover { transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--ink); }
+  .radio-card.on { background: var(--accent-2); box-shadow: 4px 4px 0 var(--ink); }
+  .radio-card .ring { width: 22px; height: 22px; border-radius: 50%; border: 2.5px solid var(--ink); flex-shrink: 0; transition: all 0.2s; position: relative; background: var(--paper); }
+  .radio-card.on .ring::after { content: ''; position: absolute; inset: 3px; background: var(--ink); border-radius: 50%; }
+  .radio-card .label { font-weight: 700; font-size: 16px; color: var(--ink); display: block; }
+  .radio-card .desc { font-size: 13px; color: var(--ink-2); margin-top: 2px; font-weight: 500; }
+
+  .form-nav { display: flex; justify-content: space-between; margin-top: 28px; gap: 12px; }
+  .form-nav .btn { flex: 0 0 auto; }
+  .btn-back { background: transparent; color: var(--ink-2); border: 1.5px solid var(--rule); }
+  .btn-back:hover { border-color: var(--ink); color: var(--ink); transform: translateX(-2px); }
+  .btn[disabled] { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+  .form-success { text-align: center; padding: 32px 16px; }
+  .form-success-icon {
+    width: 72px; height: 72px; border-radius: 50%; background: var(--accent-3);
+    color: var(--paper); display: inline-flex; align-items: center; justify-content: center;
+    font-size: 32px; margin: 0 auto 24px; animation: pop 0.6s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  @keyframes pop { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+  .form-success h3 { font-size: clamp(28px, 4vw, 36px); margin-bottom: 12px; }
+  .form-success p { font-size: 16px; color: var(--ink-3); max-width: 420px; margin: 0 auto 28px; line-height: 1.6; }
+
+  /* FOLLOW */
+  .follow-section { padding: 90px 24px; max-width: 1320px; margin: 0 auto; }
+  .follow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .polaroid-stack { position: relative; aspect-ratio: 1.05; max-width: 480px; margin: 0 auto; width: 100%; }
+  .polaroid {
+    position: absolute; background: var(--paper); padding: 14px 14px 36px;
+    border: 1.5px solid var(--rule); border-radius: 6px;
+    box-shadow: 0 10px 30px var(--shadow);
+    transition: transform 0.4s cubic-bezier(0.34,1.4,0.64,1);
+  }
+  .polaroid::after {
+    content: attr(data-cap);
+    position: absolute; bottom: 10px; left: 0; right: 0; text-align: center;
+    font-family: 'Fraunces', serif; font-style: italic; font-size: 13px; color: var(--ink-3);
+  }
+  .polaroid-img {
+    width: 100%; aspect-ratio: 1; border-radius: 3px; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .p1 { top: 4%; left: 4%; width: 52%; transform: rotate(-6deg); }
+  .p2 { top: 16%; right: 4%; width: 48%; transform: rotate(5deg); }
+  .p3 { bottom: 6%; left: 22%; width: 56%; transform: rotate(-2deg); z-index: 2; }
+  .polaroid:hover { transform: rotate(0deg) scale(1.03); z-index: 3; }
+  .pimg-1 { background: linear-gradient(135deg, #f0c84a, #c84a2a); }
+  .pimg-2 { background: linear-gradient(135deg, #6ea84a, #4a3520); }
+  .pimg-3 { background: linear-gradient(135deg, #e8909a, #c84a2a); }
+  .pimg-marker {
+    font-family: 'DM Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.85);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 4px 10px; border: 1px solid rgba(255,255,255,0.4); border-radius: 999px;
+  }
+
+  .follow-text h2 { margin-bottom: 18px; }
+  .follow-text p { font-size: 17px; line-height: 1.6; color: var(--ink-2); margin-bottom: 14px; max-width: 460px; }
+  .social-row { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+  .social-pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 18px; background: var(--paper); border: 1.5px solid var(--rule);
+    border-radius: 999px; font-size: 14px; font-weight: 500; color: var(--ink);
+    text-decoration: none; transition: all 0.2s;
+  }
+  .social-pill:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); transform: translateY(-2px); }
+
+  /* CTA */
+  .cta-section {
+    background: var(--accent); color: white; padding: 100px 24px;
+    position: relative; overflow: hidden;
+    border-top: 4px dashed var(--ink);
+    border-bottom: 4px dashed var(--ink);
+  }
+  .cta-section::before {
+    content: ''; position: absolute; inset: 0; opacity: 0.18;
+    background-image: radial-gradient(circle, white 2px, transparent 2px);
+    background-size: 28px 28px;
+  }
+  .cta-section::after {
+    content: ''; position: absolute; top: 30px; left: 8%; width: 70px; height: 70px;
+    background: var(--accent-2); border-radius: 50%; border: 3px solid white;
+    animation: floatSlow 7s ease-in-out infinite;
+  }
+  .cta-inner { max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+  .cta-inner h2 { color: white; font-size: clamp(34px, 5vw, 72px); line-height: 1; letter-spacing: -0.03em; }
+  .cta-inner h2 .it { font-style: italic; font-weight: 400; }
+  .cta-inner p { font-size: 18px; margin-top: 22px; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+  .cta-buttons { display: flex; gap: 12px; justify-content: center; margin-top: 36px; flex-wrap: wrap; }
+  .cta-buttons .btn-primary { background: white; color: var(--accent); }
+  .cta-buttons .btn-primary:hover { background: var(--ink); color: white; }
+  .cta-buttons .btn-ghost { color: white; border-color: rgba(255,255,255,0.5); }
+  .cta-buttons .btn-ghost:hover { background: white; color: var(--accent); border-color: white; }
+
+  /* FOOTER */
+  .footer { background: var(--ink); color: rgba(251,243,223,0.7); padding: 60px 24px 36px; }
+  .footer-inner { max-width: 1320px; margin: 0 auto; }
+  .footer-top { display: flex; justify-content: space-between; align-items: start; padding-bottom: 36px; border-bottom: 1px solid rgba(251,243,223,0.15); flex-wrap: wrap; gap: 32px; }
+  .footer-brand { display: flex; align-items: center; gap: 12px; }
+  .footer-brand img { height: 40px; }
+  .footer-brand .wm { font-family: 'Fraunces', serif; font-size: 22px; color: var(--paper); font-weight: 600; letter-spacing: -0.02em; }
+  .footer-brand .wm em { color: var(--accent-2); font-weight: 500; }
+  .footer-cols { display: grid; grid-template-columns: repeat(3, auto); gap: 48px; }
+  .footer-col h5 { color: var(--paper); font-family: 'DM Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 500; margin-bottom: 14px; }
+  .footer-col a { display: block; color: rgba(251,243,223,0.7); text-decoration: none; font-size: 14px; padding: 4px 0; transition: color 0.2s; }
+  .footer-col a:hover { color: var(--accent-2); }
+  .footer-bottom { padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 12px; }
+  .footer-bottom .mono { font-family: 'DM Mono', monospace; font-size: 11px; opacity: 0.5; }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .hero { gap: 40px; }
+    .footer-cols { gap: 36px; }
+  }
+  @media (max-width: 860px) {
+    .nav { padding: 12px 16px; }
+    .nav-links { display: none; position: absolute; top: 64px; left: 12px; right: 12px;
+      flex-direction: column; gap: 6px; align-items: stretch;
+      background: var(--paper); border: 2.5px solid var(--ink); border-radius: 18px;
+      padding: 12px; box-shadow: 4px 4px 0 var(--ink);
     }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Nunito', sans-serif;
-      color: var(--brown-body);
-      background: var(--cream);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-    h1, h2, h3, .display { font-family: 'Fredoka', sans-serif; }
-
-    /* ─── Animations ─── */
-    @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes floatSlow { 0%,100%{ transform:translateY(0) rotate(0deg); } 33%{ transform:translateY(-8px) rotate(2deg); } 66%{ transform:translateY(4px) rotate(-1deg); } }
-    @keyframes popIn { 0%{ opacity:0; transform:scale(0.8); } 60%{ transform:scale(1.05); } 100%{ opacity:1; transform:scale(1); } }
-    @keyframes wiggle { 0%,100%{ transform:rotate(0deg); } 25%{ transform:rotate(5deg); } 75%{ transform:rotate(-5deg); } }
-    @keyframes pulseGlow { 0%,100%{ box-shadow:0 4px 0 #9a6420, 0 6px 16px rgba(200,134,42,0.3); } 50%{ box-shadow:0 4px 0 #9a6420, 0 6px 28px rgba(200,134,42,0.55); } }
-    @keyframes shimmer { 0%{ background-position:-200% center; } 100%{ background-position:200% center; } }
-    @keyframes bounceIn { 0%{ opacity:0; transform:translateY(20px) scale(0.9); } 60%{ transform:translateY(-4px) scale(1.02); } 100%{ opacity:1; transform:translateY(0) scale(1); } }
-    @keyframes slideRight { from{ width:0; } }
-
-    /* ─── Scroll progress bar ─── */
-    .scroll-progress { position:fixed; top:0; left:0; height:3px; background:linear-gradient(90deg, var(--ham), var(--bread-dark), var(--lettuce), var(--cheese)); z-index:200; width:0%; transition:width 0.1s linear; border-radius:0 2px 2px 0; }
-    .fade-up { opacity:0; transform:translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-    .fade-up.visible { opacity:1; transform:translateY(0); }
-
-    /* ─── Nav ─── */
-    nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:0.8rem 2rem; display:flex; align-items:center; justify-content:space-between; transition: background 0.4s, box-shadow 0.4s; }
-    nav.scrolled { background:rgba(255,249,237,0.95); backdrop-filter:blur(12px); box-shadow:0 4px 20px var(--shadow-warm); }
-    .nav-logo { display:flex; align-items:center; text-decoration:none; }
-    .nav-logo img { height:48px; width:auto; transition:transform 0.3s; }
-    .nav-logo:hover img { transform:rotate(-3deg) scale(1.05); }
-    .nav-links { display:flex; gap:1.8rem; list-style:none; align-items:center; }
-    .nav-links a { color:var(--crust); text-decoration:none; font-size:0.95rem; font-weight:700; transition:color 0.3s, transform 0.3s; padding:0.3rem 0; position:relative; }
-    .nav-links a::after { content:''; position:absolute; bottom:-2px; left:50%; width:0; height:2.5px; background:var(--orange-pop); border-radius:2px; transition:width 0.3s ease, left 0.3s ease; }
-    .nav-links a:hover::after { width:100%; left:0; }
-    .nav-links a:hover { color:var(--orange-pop); transform:translateY(-2px); }
-    .nav-cta { background:var(--bread-dark)!important; color:var(--warm-white)!important; padding:0.6rem 1.4rem!important; border-radius:100px!important; font-weight:700!important; box-shadow:0 3px 0 #9a6420, 0 4px 12px rgba(200,134,42,0.3); transition:transform 0.3s, box-shadow 0.3s!important; }
-    .nav-cta:hover { transform:translateY(-3px)!important; box-shadow:0 5px 0 #9a6420, 0 8px 20px rgba(200,134,42,0.35)!important; }
-    .nav-toggle { display:none; background:none; border:none; cursor:pointer; padding:0.5rem; }
-    .nav-toggle span { display:block; width:26px; height:3px; background:var(--crust); margin:5px 0; border-radius:3px; transition:0.3s; }
-
-    /* ─── Hero ─── */
-    .hero { min-height:100vh; background:linear-gradient(170deg, var(--cream) 0%, var(--cream-dark) 40%, #ffe8b8 100%); display:flex; align-items:center; position:relative; overflow:hidden; }
-    .hero::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:80px; background:var(--cream); clip-path:ellipse(55% 100% at 50% 100%); }
-    .hero-doodles { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
-    .doodle { position:absolute; opacity:0.06; font-size:4rem; }
-    .doodle:nth-child(1) { top:10%; left:5%; animation:floatSlow 7s ease-in-out infinite; }
-    .doodle:nth-child(2) { top:15%; right:10%; animation:floatSlow 9s ease-in-out 1s infinite; font-size:3rem; }
-    .doodle:nth-child(3) { bottom:20%; left:12%; animation:floatSlow 8s ease-in-out 0.5s infinite; }
-    .doodle:nth-child(4) { top:40%; right:5%; animation:floatSlow 10s ease-in-out 2s infinite; font-size:3.5rem; }
-    .doodle:nth-child(5) { bottom:30%; right:20%; animation:floatSlow 6s ease-in-out 1.5s infinite; font-size:2.5rem; }
-    .doodle:nth-child(6) { top:60%; left:3%; animation:floatSlow 11s ease-in-out 0.8s infinite; font-size:3rem; }
-    .hero-inner { max-width:1100px; margin:0 auto; padding:8rem 2rem 6rem; position:relative; z-index:2; text-align:center; display:flex; flex-direction:column; align-items:center; }
-    .hero-logo { width:clamp(180px, 30vw, 280px); height:auto; margin-bottom:1rem; animation:popIn 0.8s ease forwards; filter:drop-shadow(0 6px 20px rgba(139,94,42,0.2)); }
-    .hero-badge { display:inline-flex; align-items:center; gap:0.5rem; background:var(--warm-white); border:2.5px dashed var(--ham); color:var(--crust); padding:0.55rem 1.4rem; border-radius:100px; font-size:0.9rem; font-weight:700; margin-bottom:1.5rem; animation:fadeUp 0.8s ease 0.2s forwards; opacity:0; }
-    .hero h1 { font-size:clamp(2.4rem, 6vw, 4.2rem); color:var(--brown-text); line-height:1.15; font-weight:700; max-width:750px; animation:fadeUp 0.8s ease 0.35s forwards; opacity:0; }
-    .hero h1 em { font-style:normal; color:var(--bread-dark); position:relative; }
-    .hero h1 em::after { content:''; position:absolute; left:-4px; right:-4px; bottom:2px; height:12px; background:var(--bread-light); border-radius:4px; z-index:-1; opacity:0.7; }
-    .hero-sub { font-size:1.15rem; color:var(--brown-light); max-width:520px; line-height:1.75; margin:1.2rem auto 0; animation:fadeUp 0.8s ease 0.5s forwards; opacity:0; font-weight:500; }
-    .hero-actions { display:flex; gap:1rem; margin-top:2.2rem; flex-wrap:wrap; justify-content:center; animation:fadeUp 0.8s ease 0.65s forwards; opacity:0; }
-
-    /* ─── Buttons ─── */
-    .btn { display:inline-flex; align-items:center; gap:0.5rem; padding:0.95rem 2rem; border-radius:100px; font-family:'Fredoka',sans-serif; font-size:1rem; font-weight:600; text-decoration:none; cursor:pointer; border:none; transition:transform 0.2s, box-shadow 0.2s; }
-    .btn:hover { transform:translateY(-3px); }
-    .btn:active { transform:translateY(0); }
-    .btn-primary { background:var(--bread-dark); color:var(--warm-white); box-shadow:0 4px 0 #9a6420, 0 6px 16px rgba(200,134,42,0.3); animation:pulseGlow 3s ease-in-out infinite; }
-    .btn-primary:hover { box-shadow:0 6px 0 #9a6420, 0 10px 24px rgba(200,134,42,0.35); animation:none; }
-    .btn-secondary { background:var(--warm-white); color:var(--crust); border:2.5px solid var(--bread); box-shadow:0 4px 0 var(--cream-dark), 0 4px 12px rgba(139,94,42,0.1); }
-    .btn-secondary:hover { box-shadow:0 6px 0 var(--cream-dark), 0 8px 20px rgba(139,94,42,0.15); border-color:var(--bread-dark); }
-
-    /* ─── Stat strip ─── */
-    .hero-stat-strip { display:flex; gap:1.5rem; margin-top:3.5rem; justify-content:center; flex-wrap:wrap; animation:fadeUp 0.8s ease 0.8s forwards; opacity:0; }
-    .hero-stat { background:var(--warm-white); border:2.5px solid var(--bread-light); border-radius:20px; padding:1.2rem 1.8rem; text-align:center; min-width:130px; transition:transform 0.3s, border-color 0.3s, box-shadow 0.3s; cursor:default; }
-    .hero-stat:nth-child(1) { border-bottom:4px solid var(--ham); }
-    .hero-stat:nth-child(2) { border-bottom:4px solid var(--lettuce); }
-    .hero-stat:nth-child(3) { border-bottom:4px solid var(--cheese); }
-    .hero-stat:nth-child(4) { border-bottom:4px solid var(--ham); }
-    .hero-stat:hover { transform:translateY(-8px) rotate(-2deg) scale(1.05); box-shadow:0 8px 24px var(--shadow-warm); }
-    .hero-stat h3 { font-size:1.8rem; font-weight:700; color:var(--bread-dark); line-height:1; }
-    .hero-stat p { color:var(--brown-light); font-size:0.78rem; margin-top:0.2rem; text-transform:uppercase; letter-spacing:0.06em; font-weight:700; }
-
-    /* ─── Sections ─── */
-    .section { padding:5rem 2rem; position:relative; }
-    .section-inner { max-width:1050px; margin:0 auto; }
-    .section-label { display:inline-flex; align-items:center; gap:0.6rem; font-family:'Fredoka',sans-serif; font-size:0.85rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--bread-dark); margin-bottom:0.6rem; background:var(--cream-dark); padding:0.4rem 1rem; border-radius:100px; border:2px dashed var(--bread-light); }
-    .section h2 { font-size:clamp(1.8rem, 4vw, 2.8rem); color:var(--brown-text); line-height:1.2; }
-    .section h2 em { font-style:normal; color:var(--bread-dark); }
-
-    /* ─── What We Do (side by side) ─── */
-    .what-grid { display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; margin-top:2.5rem; align-items:start; }
-    .what-text p { font-size:1.08rem; line-height:1.8; color:var(--brown-body); margin-bottom:1.2rem; font-weight:500; }
-    .what-text .highlight { background:var(--bread-light); padding:0.1em 0.35em; border-radius:6px; font-weight:700; color:var(--crust); }
-    .sammich-card { background:var(--warm-white); border-radius:24px; padding:2.2rem; border:3px solid var(--bread-light); border-left:5px solid var(--lettuce); box-shadow:0 6px 0 var(--cream-dark), 0 8px 24px var(--shadow-warm); position:relative; overflow:hidden; }
-    .sammich-card::before { content:'🥪'; position:absolute; top:-15px; right:-5px; font-size:5rem; opacity:0.08; transform:rotate(15deg); }
-    .sammich-card h3 { font-size:1.4rem; color:var(--brown-text); margin-bottom:1.2rem; }
-    .sammich-item { display:flex; align-items:center; gap:1rem; padding:0.9rem 0; border-bottom:2px dashed var(--cream-dark); }
-    .sammich-item:last-child { border-bottom:none; }
-    .sammich-icon { width:48px; height:48px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; flex-shrink:0; transition:transform 0.3s; }
-    .sammich-item:hover .sammich-icon { transform:scale(1.15) rotate(-5deg); }
-    .sammich-item { transition:transform 0.3s, background 0.3s; border-radius:12px; padding:0.9rem 0.5rem; margin:0 -0.5rem; }
-    .sammich-item:hover { background:var(--cream); transform:translateX(6px); }
-    .sammich-icon.food { background:#fff0c8; border:2px solid var(--bread-light); }
-    .sammich-icon.snacks { background:#e0ffd6; border:2px solid #b8e6a8; }
-    .sammich-icon.supplies { background:#ffe4e8; border:2px solid #f0c0c8; }
-    .sammich-item-text h4 { font-family:'Fredoka',sans-serif; font-size:1rem; font-weight:600; color:var(--brown-text); }
-    .sammich-item-text p { font-size:0.88rem; color:var(--brown-light); margin-top:0.1rem; font-weight:500; }
-
-    /* ─── Sponsor a Run ─── */
-    .sponsor-section { background:var(--cream-dark); }
-    .sponsor-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; margin-top:2.5rem; align-items:start; }
-    .cost-breakdown { display:flex; flex-direction:column; gap:0.6rem; }
-    .cost-item { display:flex; justify-content:space-between; align-items:center; padding:0.7rem 1rem; background:var(--warm-white); border-radius:12px; border:2px solid var(--bread-light); font-weight:600; font-size:0.95rem; transition:transform 0.25s, box-shadow 0.25s, border-color 0.25s; cursor:default; }
-    .cost-item:hover { transform:translateX(6px); border-color:var(--bread); box-shadow:0 3px 12px var(--shadow-warm); }
-    .cost-item .item-name { display:flex; align-items:center; gap:0.6rem; }
-    .cost-item .item-price { font-family:'Fredoka',sans-serif; color:var(--bread-dark); }
-    .cost-total-row { display:flex; justify-content:space-between; align-items:center; padding:1rem 1rem; background:var(--crust); border-radius:14px; color:var(--cream); font-family:'Fredoka',sans-serif; font-size:1.1rem; font-weight:700; margin-top:0.4rem; border-left:5px solid var(--cheese); }
-    .cost-total-row .total-price { font-size:1.4rem; color:var(--bread-light); }
-
-    .calculator-card { background:var(--warm-white); border-radius:24px; padding:2.5rem; border:3px solid var(--bread-light); border-left:5px solid var(--ham); box-shadow:0 6px 0 var(--cream-dark), 0 8px 24px var(--shadow-warm); text-align:center; }
-    .calculator-card h3 { font-size:1.4rem; color:var(--brown-text); margin-bottom:0.5rem; }
-    .calculator-card .calc-sub { font-size:0.95rem; color:var(--brown-light); margin-bottom:2rem; font-weight:500; }
-    .slider-wrap { margin:1.5rem 0; }
-    .slider-label { font-family:'Fredoka',sans-serif; font-size:1rem; color:var(--brown-text); font-weight:600; margin-bottom:0.8rem; }
-    .sammich-slider { -webkit-appearance:none; appearance:none; width:100%; height:12px; border-radius:10px; background:linear-gradient(90deg, #e0ffd6, var(--cream-dark)); border:2px solid var(--bread-light); outline:none; transition:0.2s; cursor:pointer; }
-    .sammich-slider::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:32px; height:32px; border-radius:50%; background:var(--lettuce); cursor:pointer; border:3px solid var(--warm-white); box-shadow:0 2px 8px rgba(74,154,58,0.4); transition:transform 0.2s; }
-    .sammich-slider::-webkit-slider-thumb:hover { transform:scale(1.15); }
-    .sammich-slider::-moz-range-thumb { width:32px; height:32px; border-radius:50%; background:var(--lettuce); cursor:pointer; border:3px solid var(--warm-white); box-shadow:0 2px 8px rgba(74,154,58,0.4); }
-    .calc-output { margin-top:1.5rem; }
-    .calc-bags { font-family:'Fredoka',sans-serif; font-size:3.5rem; font-weight:700; color:var(--bread-dark); line-height:1; }
-    .calc-bags-label { font-size:0.9rem; color:var(--brown-light); font-weight:600; text-transform:uppercase; letter-spacing:0.06em; margin-top:0.2rem; }
-    .calc-total { margin-top:1.2rem; background:linear-gradient(135deg, var(--crust), var(--ham-dark)); color:var(--cream); border-radius:16px; padding:1.2rem 1.5rem; display:inline-block; }
-    .calc-total-amount { font-family:'Fredoka',sans-serif; font-size:2rem; font-weight:700; color:var(--bread-light); }
-    .calc-total-label { font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; opacity:0.7; }
-    .calc-donate { margin-top:1.5rem; }
-
-    /* ─── Story ─── */
-    .story-section { background:var(--crust); color:var(--cream); position:relative; overflow:hidden; }
-    .story-section::before { content:''; position:absolute; top:-2px; left:0; right:0; height:60px; background:var(--cream-dark); clip-path:ellipse(55% 100% at 50% 0%); }
-    .story-section::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:60px; background:var(--cream); clip-path:ellipse(55% 100% at 50% 100%); }
-    .story-section .section-label { color:var(--bread-light); background:rgba(255,255,255,0.08); border-color:rgba(255,255,255,0.15); }
-    .story-section h2 { color:var(--cream); }
-    .story-section h2 em { color:var(--bread-light); }
-    .story-bg-dots { position:absolute; inset:0; opacity:0.04; background-image:radial-gradient(circle, var(--bread-light) 1.5px, transparent 1.5px); background-size:30px 30px; }
-    .story-inner { position:relative; z-index:2; }
-
-    .story-timeline { display:flex; align-items:stretch; gap:0; margin-top:2.5rem; }
-    .timeline-card { flex:1; background:rgba(255,255,255,0.08); border:2.5px solid rgba(255,255,255,0.12); border-radius:20px; padding:1.8rem; transition:transform 0.3s, background 0.3s, box-shadow 0.3s; }
-    .timeline-card:hover { transform:translateY(-8px) rotate(-1deg) scale(1.03); background:rgba(255,255,255,0.16); box-shadow:0 12px 32px rgba(0,0,0,0.2); }
-    .timeline-card:nth-child(1) { border-top:3px solid var(--ham); }
-    .timeline-card:nth-child(3) { border-top:3px solid var(--lettuce); }
-    .timeline-card:nth-child(5) { border-top:3px solid var(--cheese); }
-    .timeline-card:nth-child(7) { border-top:3px solid var(--ham); }
-    .timeline-arrow { display:flex; align-items:center; justify-content:center; padding:0 0.6rem; color:var(--bread-light); font-size:1.5rem; opacity:0.5; flex-shrink:0; }
-    .timeline-year { font-family:'Fredoka',sans-serif; font-size:2.2rem; font-weight:700; color:var(--bread-light); line-height:1; }
-    .timeline-card h4 { font-family:'Fredoka',sans-serif; font-size:0.95rem; font-weight:600; margin-top:0.5rem; color:var(--cream); }
-    .timeline-card p { font-size:0.85rem; line-height:1.6; color:rgba(255,249,237,0.6); margin-top:0.3rem; font-weight:500; }
-
-    /* ─── Featured / Instagram ─── */
-    .featured-section { background:var(--cream); }
-    .featured-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; margin-top:2.5rem; align-items:center; }
-    .ig-embed-wrap { background:var(--warm-white); border-radius:24px; padding:1.2rem; border:3px solid var(--bread-light); border-top:5px solid var(--lettuce); box-shadow:0 6px 0 #ffe0a0, 0 8px 24px var(--shadow-warm); overflow:hidden; }
-    .ig-embed-wrap blockquote { margin:0!important; border:none!important; }
-    .featured-text h3 { font-family:'Fredoka',sans-serif; font-size:1.6rem; color:var(--brown-text); line-height:1.3; margin-bottom:0.8rem; }
-    .featured-text p { font-size:1.05rem; line-height:1.75; color:var(--brown-body); margin-bottom:1.2rem; font-weight:500; }
-    .social-links { display:flex; gap:0.8rem; flex-wrap:wrap; }
-    .social-link { display:inline-flex; align-items:center; gap:0.45rem; padding:0.65rem 1.3rem; background:var(--warm-white); border:2.5px solid var(--bread-light); border-radius:100px; font-family:'Fredoka',sans-serif; font-size:0.9rem; font-weight:600; color:var(--crust); text-decoration:none; transition:transform 0.3s, box-shadow 0.3s, border-color 0.3s, background 0.3s; box-shadow:0 3px 0 var(--cream-dark); }
-    .social-link:first-child:hover { transform:translateY(-3px); box-shadow:0 5px 0 var(--cream-dark), 0 6px 16px var(--shadow-warm); border-color:var(--ham); background:#fff0f2; }
-    .social-link:last-child:hover { transform:translateY(-3px); box-shadow:0 5px 0 var(--cream-dark), 0 6px 16px var(--shadow-warm); border-color:#4267B2; background:#f0f4ff; }
-
-    /* ─── CTA ─── */
-    .cta-section { background:linear-gradient(160deg, var(--bread-dark) 0%, var(--crust) 100%); text-align:center; position:relative; overflow:hidden; padding:6rem 2rem; }
-    .cta-section::before { content:''; position:absolute; top:-2px; left:0; right:0; height:60px; background:var(--cream); clip-path:ellipse(55% 100% at 50% 0%); }
-    .cta-doodles { position:absolute; inset:0; pointer-events:none; opacity:0.06; background-image:radial-gradient(circle, var(--bread-light) 2px, transparent 2px); background-size:40px 40px; }
-    .cta-inner { max-width:650px; margin:0 auto; position:relative; z-index:2; }
-    .cta-inner h2 { font-size:clamp(2rem, 5vw, 3rem); color:var(--cream); line-height:1.2; }
-    .cta-inner h2 em { font-style:normal; color:var(--bread-light); }
-    .cta-inner p { font-size:1.1rem; color:rgba(255,249,237,0.7); margin-top:1rem; line-height:1.7; font-weight:500; }
-    .cta-buttons { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; margin-top:2rem; }
-    .cta-buttons .btn { font-size:1.05rem; padding:1rem 2.2rem; }
-    .btn-cta-primary { background:var(--lettuce); color:#fff; box-shadow:0 4px 0 var(--lettuce-dark), 0 6px 16px rgba(74,154,58,0.4); }
-    .btn-cta-primary:hover { box-shadow:0 6px 0 var(--lettuce-dark), 0 10px 24px rgba(74,154,58,0.45); }
-    .btn-cta-outline { background:transparent; color:var(--cream); border:2.5px solid rgba(255,249,237,0.35); }
-    .btn-cta-outline:hover { border-color:var(--bread-light); color:var(--bread-light); box-shadow:0 4px 16px rgba(245,223,160,0.15); }
-
-    /* ─── Footer ─── */
-    footer { background:#3d2510; padding:2.5rem 2rem; text-align:center; }
-    .footer-inner { max-width:1050px; margin:0 auto; }
-    .footer-logo img { height:40px; width:auto; opacity:0.85; }
-    .footer-links { display:flex; gap:1.8rem; justify-content:center; margin-top:1.2rem; flex-wrap:wrap; }
-    .footer-links a { color:rgba(255,249,237,0.5); text-decoration:none; font-size:0.9rem; font-weight:600; transition:color 0.3s; }
-    .footer-links a:hover { color:var(--bread-light); }
-    .footer-copy { color:rgba(255,249,237,0.25); font-size:0.8rem; margin-top:1.5rem; font-weight:500; }
-
-    /* ─── Volunteer Form ─── */
-    .volunteer-section { background:var(--cream-dark); position:relative; overflow:hidden; }
-    .volunteer-section::before { content:''; position:absolute; top:-2px; left:0; right:0; height:60px; background:var(--cream); clip-path:ellipse(55% 100% at 50% 0%); }
-    .volunteer-form-wrap { background:var(--warm-white); border-radius:28px; padding:2.8rem; border:3px solid var(--bread-light); border-top:5px solid var(--ham); box-shadow:0 6px 0 #ffe0a0, 0 10px 32px var(--shadow-warm); margin-top:2rem; position:relative; overflow:hidden; }
-    .volunteer-form-wrap::before { content:'✋'; position:absolute; top:-10px; right:10px; font-size:6rem; opacity:0.05; transform:rotate(10deg); pointer-events:none; }
-    .form-intro { font-size:1.05rem; line-height:1.75; color:var(--brown-body); margin-bottom:2rem; font-weight:500; max-width:600px; }
-    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
-    .form-group { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1.2rem; }
-    .form-group label { font-family:'Fredoka',sans-serif; font-size:1rem; font-weight:600; color:var(--brown-text); }
-    .form-group label .req { color:var(--ham-dark); margin-left:2px; }
-    .form-group input, .form-group select { font-family:'Nunito',sans-serif; font-size:0.98rem; font-weight:600; color:var(--brown-text); background:var(--cream); border:2.5px solid var(--bread-light); border-radius:14px; padding:0.85rem 1.1rem; outline:none; transition:border-color 0.25s, box-shadow 0.25s; width:100%; -webkit-appearance:none; appearance:none; }
-    .form-group input:focus, .form-group select:focus { border-color:var(--bread-dark); box-shadow:0 0 0 4px rgba(200,134,42,0.12); background:var(--warm-white); }
-    .form-group input::placeholder { color:var(--brown-light); font-weight:500; }
-    .form-group .field-hint { font-size:0.83rem; color:var(--brown-light); font-weight:500; line-height:1.5; }
-    .form-group select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238b5e2a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 1rem center; padding-right:2.8rem; cursor:pointer; }
-    .form-divider { margin:1.8rem 0 1.4rem; padding-bottom:1rem; border-bottom:2.5px dashed var(--bread-light); }
-    .form-divider h3 { font-family:'Fredoka',sans-serif; font-size:1.3rem; color:var(--brown-text); margin-bottom:0.3rem; }
-    .form-divider p { font-size:0.9rem; color:var(--brown-light); line-height:1.65; font-weight:500; }
-    .radio-group { display:flex; flex-direction:column; gap:0.7rem; margin-top:0.2rem; }
-    .radio-option { display:flex; align-items:center; gap:0.75rem; padding:0.85rem 1.1rem; background:var(--cream); border:2.5px solid var(--bread-light); border-radius:14px; cursor:pointer; transition:border-color 0.25s, background 0.25s; }
-    .radio-option:hover { border-color:var(--bread-dark); background:var(--warm-white); }
-    .radio-option input[type="radio"] { width:20px; height:20px; accent-color:var(--bread-dark); cursor:pointer; flex-shrink:0; }
-    .radio-option span { font-family:'Nunito',sans-serif; font-size:0.98rem; font-weight:700; color:var(--brown-text); }
-    .radio-option:has(input:checked) { border-color:var(--bread-dark); background:var(--cream-dark); }
-    .form-submit { margin-top:2rem; }
-    .btn-submit { background:var(--ham-dark); color:var(--warm-white); box-shadow:0 4px 0 #9a4050, 0 6px 16px rgba(196,110,122,0.35); font-size:1.05rem; padding:1rem 2.4rem; border:none; cursor:pointer; font-family:'Fredoka',sans-serif; font-weight:600; }
-    .btn-submit:hover { box-shadow:0 6px 0 #9a4050, 0 10px 24px rgba(196,110,122,0.4); transform:translateY(-3px); }
-    .form-success { display:none; text-align:center; padding:3rem 2rem; }
-    .form-success .success-icon { font-size:4rem; margin-bottom:1rem; }
-    .form-success h3 { font-family:'Fredoka',sans-serif; font-size:1.8rem; color:var(--brown-text); margin-bottom:0.5rem; }
-    .form-success p { color:var(--brown-light); font-size:1rem; font-weight:500; line-height:1.7; }
-
-    /* ─── Reduced motion ─── */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration:0.01ms!important; animation-iteration-count:1!important; transition-duration:0.01ms!important; scroll-behavior:auto!important; }
-      .scroll-progress { display:none; }
-    }
-
-    /* ─── Responsive ─── */
-    @media (max-width: 768px) {
-      .nav-links { display:none; }
-      .nav-links.open { display:flex; flex-direction:column; position:fixed; inset:0; background:rgba(255,249,237,0.97); backdrop-filter:blur(20px); justify-content:center; align-items:center; gap:2rem; z-index:99; }
-      .nav-links.open a { font-size:1.3rem; }
-      .nav-toggle { display:block; z-index:101; }
-      .what-grid { grid-template-columns:1fr; }
-      .sponsor-grid { grid-template-columns:1fr; }
-      .featured-grid { grid-template-columns:1fr; }
-      .hero-stat-strip { gap:0.8rem; }
-      .hero-stat { min-width:110px; padding:1rem 1.2rem; }
-      .form-row { grid-template-columns:1fr; }
-      .volunteer-form-wrap { padding:1.8rem; }
-      .timeline-arrow { transform:rotate(90deg); padding:0.3rem 0; }
-      .section { padding:4rem 1.5rem; }
-      .hero-inner { padding:7rem 1.5rem 5rem; }
-    }
-  </style>
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 12px 16px; border-radius: 12px; }
+    .nav-toggle { display: inline-flex; }
+    .hero { grid-template-columns: 1fr; padding: 100px 20px 40px; gap: 32px; text-align: left; }
+    .hero-art { max-width: 420px; margin: 0 auto; }
+    .hero-sticker { width: 96px; height: 96px; font-size: 12px; }
+    .metrics { grid-template-columns: repeat(2, 1fr); padding: 8px 20px 32px; }
+    .about-grid, .follow-grid { grid-template-columns: 1fr; gap: 40px; }
+    .timeline { grid-template-columns: repeat(2, 1fr); }
+    .footer-top { flex-direction: column; }
+    .footer-cols { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .form-card { padding: 28px 22px; }
+    .field-row { grid-template-columns: 1fr; gap: 0; }
+    .section { padding: 70px 20px; }
+    .form-section { padding: 70px 20px; }
+    .follow-section { padding: 70px 20px; }
+    .timeline-section { padding: 70px 0; }
+    .timeline-inner { padding: 0 20px; }
+    .recipe-card { padding: 22px 18px; }
+    .calc { padding: 28px 22px; }
+    .recipe-total .price { font-size: 26px; }
+  }
+  @media (max-width: 520px) {
+    .hero { padding: 92px 16px 32px; }
+    .hero-sub { font-size: 16px; }
+    .hero-cta { gap: 10px; }
+    .btn { padding: 12px 18px; font-size: 14px; }
+    .hero-sticker { width: 84px; height: 84px; font-size: 11px; padding: 8px; }
+    .metrics { padding: 4px 16px 28px; gap: 10px; }
+    .metric { padding: 18px 14px; }
+    .metric-num { font-size: 38px; }
+    .timeline { grid-template-columns: 1fr; }
+    .footer { padding: 48px 20px 32px; }
+    .footer-cols { grid-template-columns: 1fr; gap: 22px; }
+    .cta-section { padding: 80px 20px; }
+    .cta-buttons .btn { width: 100%; justify-content: center; }
+    .recipe-row { grid-template-columns: 22px 1fr auto; gap: 10px; padding: 10px 0; }
+    .recipe-name { font-size: 14px; }
+    .recipe-name .desc { font-size: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+</style>
 </head>
 <body>
+<div id="app">
 
-  <!-- Scroll progress -->
-  <div class="scroll-progress" id="scrollProgress"></div>
+<nav class="nav" id="nav">
+  <a href="#" class="nav-brand" aria-label="Ramadan Sammich home">
+    <img src="icon.png" alt="" width="36" height="36" />
+    <span class="wm">Ramadan <em>Sammich</em></span>
+  </a>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#sponsor">Sponsor</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#volunteer" class="nav-cta">Volunteer →</a></li>
+  </ul>
+</nav>
 
-  <!-- Nav -->
-  <nav id="nav">
-    <a href="#" class="nav-logo"><img src="icon.png" alt="Ramadan Sammich"></a>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#about">About</a></li>
-      <li><a href="#sponsor">Sponsor</a></li>
-      <li><a href="#story">Our Story</a></li>
-      <li><a href="#featured">Follow Us</a></li>
-      <li><a href="#volunteer" class="nav-cta">Volunteer ✋</a></li>
-    </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
-  </nav>
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="hero-doodles">
-      <div class="doodle">🥪</div><div class="doodle">🌙</div><div class="doodle">🍎</div>
-      <div class="doodle">📦</div><div class="doodle">🧃</div><div class="doodle">💛</div>
-    </div>
-    <div class="hero-inner">
-      <img src="logo.png" alt="Ramadan Sammich" class="hero-logo">
-      <div class="hero-badge">🌙 Since 2012 — Feeding the GTA</div>
-      <h1>Distributing sammiches to shelters across <em>the GTA</em></h1>
-      <p class="hero-sub">A community-driven initiative that assembles and delivers meals to local shelters every Ramadan. One sammich at a time.</p>
-      <div class="hero-actions">
-        <a href="#volunteer" class="btn btn-primary">✋ Volunteer With Us</a>
-        <a href="https://www.launchgood.com/v4/campaign/ramadan_sammich_2025__distributing_meals_to_shelters_across_the_gta_1" target="_blank" class="btn btn-secondary">Donate via LaunchGood →</a>
-      </div>
-      <div class="hero-stat-strip">
-        <div class="hero-stat"><h3>13+</h3><p>Years Running</p></div>
-        <div class="hero-stat"><h3>200</h3><p>Meals Per Run</p></div>
-        <div class="hero-stat"><h3>1000s</h3><p>Sammiches Served</p></div>
-        <div class="hero-stat"><h3>GTA</h3><p>Wide Coverage</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- What We Do -->
-  <section class="section" id="about">
-    <div class="section-inner">
-      <div class="section-label fade-up">🥪 What We Do</div>
-      <h2 class="fade-up">Assembling meals, <em>building community</em></h2>
-      <div class="what-grid">
-        <div class="what-text fade-up">
-          <p><span class="highlight">Ramadan Sammich</span> is a community-driven initiative that assembles and distributes meals to local shelters in the GTA every Ramadan.</p>
-          <p>Volunteers gather weekly to prepare and deliver <span class="highlight">200 meals per run</span>, fostering community, support, and giving back during the holiest month of the year.</p>
-          <a href="#volunteer" class="btn btn-primary" style="margin-top:0.5rem;">Join Our Next Run →</a>
-        </div>
-        <div class="sammich-card fade-up">
-          <h3>What's In A Sammich?</h3>
-          <div class="sammich-item">
-            <div class="sammich-icon food">🥪</div>
-            <div class="sammich-item-text"><h4>The Sammich</h4><p>Bread, bologna, lettuce, cheese & condiments</p></div>
-          </div>
-          <div class="sammich-item">
-            <div class="sammich-icon snacks">🍏</div>
-            <div class="sammich-item-text"><h4>Sides & Drinks</h4><p>Juice, apples & granola bars</p></div>
-          </div>
-          <div class="sammich-item">
-            <div class="sammich-icon supplies">📦</div>
-            <div class="sammich-item-text"><h4>Packaging</h4><p>Paper bags & Ziplocs for easy distribution</p></div>
-          </div>
-        </div>
+<section class="hero">
+  <div>
+    <span class="hero-eyebrow"><span class="eyebrow-dot"></span> 🌙 Since 2012 · Greater Toronto Area</span>
+    <h1>
+      Feeding the GTA,<br />
+      <span class="underline">
+        one <span class="it">sammich</span> 🥪
+        <svg viewBox="0 0 200 14" preserveAspectRatio="none" aria-hidden="true"><path d="M2 8 Q 50 2 100 6 T 198 5" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+      </span>
+      at a time.
+    </h1>
+    <p class="hero-sub">
+      A community-driven initiative that assembles and delivers meals to local
+      shelters every Ramadan. ✨ Volunteers gather weekly, hands move fast, and
+      200 meals leave every run. We've been doing this for thirteen years. 💛
+    </p>
+    <div class="hero-cta">
+      <a href="#volunteer" class="btn btn-primary">🙌 Volunteer with us →</a>
+      <a href="https://www.launchgood.com/v4/campaign/ramadan_sammich_2025__distributing_meals_to_shelters_across_the_gta_1" target="_blank" rel="noopener" class="btn btn-ghost">💝 Sponsor a run</a>
+      <div class="sticker hero-sticker" aria-hidden="true">
+        13&nbsp;years<br/>of&nbsp;love&nbsp;💛
       </div>
     </div>
-  </section>
+  </div>
+  <div class="hero-art">
+    <div class="tape tape-1" aria-hidden="true"></div>
+    <div class="tape pink tape-2" aria-hidden="true"></div>
+    <div class="hero-logo-frame">
+      <div class="stack-tag">🥪 Spec · 001</div>
+      <div class="stack-tag-r">$2.82 / unit</div>
+      <img src="logo.png" alt="Ramadan Sammich logo" class="hero-logo-img" width="3588" height="1504" loading="eager" fetchpriority="high" />
+      <div class="stack-stat">
+        <span>🌙 Halal · Made with love</span>
+        <span>📍 GTA</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- Sponsor a Run -->
-  <section class="section sponsor-section" id="sponsor">
-    <div class="section-inner">
-      <div class="section-label fade-up">💛 Sponsor a Run</div>
-      <h2 class="fade-up">Every bag costs <em>~$2.82</em> to make</h2>
-      <div class="sponsor-grid">
-        <div class="cost-breakdown fade-up">
-          <div class="cost-item"><span class="item-name">🍞 Bread</span><span class="item-price">$0.78</span></div>
-          <div class="cost-item"><span class="item-name">🥩 Halal Chicken Bologna</span><span class="item-price">$0.63</span></div>
-          <div class="cost-item"><span class="item-name">🍊 Clementine</span><span class="item-price">$0.45</span></div>
-          <div class="cost-item"><span class="item-name">🧃 Juice Box</span><span class="item-price">$0.36</span></div>
-          <div class="cost-item"><span class="item-name">🍫 Snack Bar</span><span class="item-price">$0.21</span></div>
-          <div class="cost-item"><span class="item-name">🧀 Cheese Slice</span><span class="item-price">$0.17</span></div>
-          <div class="cost-item"><span class="item-name">🥬 Lettuce</span><span class="item-price">$0.10</span></div>
-          <div class="cost-item"><span class="item-name">🫙 Condiments (Mayo & Mustard)</span><span class="item-price">$0.07</span></div>
-          <div class="cost-item"><span class="item-name">📦 Paper Bags & Ziplocs</span><span class="item-price">$0.05</span></div>
-          <div class="cost-total-row">
-            <span>Cost Per Bag</span>
-            <span class="total-price">$2.82</span>
-          </div>
+<div class="metrics reveal">
+  <div class="metric">
+    <div class="metric-num">13<span class="it">+</span></div>
+    <div class="metric-label">🗓️ Years running</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num">200</div>
+    <div class="metric-label">🥪 Meals per run</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num">12k<span class="it">+</span></div>
+    <div class="metric-label">💛 Sammiches served</div>
+  </div>
+  <div class="metric">
+    <div class="metric-num">GTA</div>
+    <div class="metric-label">📍 Wide coverage</div>
+  </div>
+</div>
+
+<section class="section reveal" id="about">
+  <div class="section-head">
+    <div>
+      <div class="section-num">01 — What we do</div>
+      <h2>Assembling meals.<br /><span class="it">Building community.</span> 💛</h2>
+    </div>
+    <p class="section-lead">
+      🌙 Every Ramadan, volunteers gather weekly to prepare and deliver 200 meals per run to shelters across the Greater Toronto Area.
+    </p>
+  </div>
+  <div class="about-grid">
+    <p class="about-text">
+      A bag of food is small. <span class="accent">A bag of food shows up every week, for thirteen years</span>, and it becomes something else entirely — a habit of care 🤲, a piece of a community, a way of belonging to your city.
+    </p>
+    <div class="recipe-card">
+      <div class="tape pink tape-r" aria-hidden="true"></div>
+      <div class="recipe-header">
+        <div class="recipe-title">🥪 What's in the bag</div>
+        <div class="recipe-meta">Recipe · Std.</div>
+      </div>
+      <div class="recipe-list">
+        <div class="recipe-row">
+          <div class="recipe-num">01</div>
+          <div class="recipe-name">🍞 Bread (2 slices)<span class="desc">Soft white sandwich bread, sesame top</span></div>
+          <div class="recipe-price">$0.78</div>
         </div>
-        <div class="calculator-card fade-up">
-          <h3>How Many Bags Will You Sponsor? 🥪</h3>
-          <p class="calc-sub">Slide to see the impact of your donation</p>
-          <div class="slider-wrap">
-            <input type="range" min="1" max="1000" value="50" class="sammich-slider" id="sammichSlider">
+        <div class="recipe-row">
+          <div class="recipe-num">02</div>
+          <div class="recipe-name">🍗 Halal chicken bologna<span class="desc">Two folded slices, deli-cut</span></div>
+          <div class="recipe-price">$0.63</div>
+        </div>
+        <div class="recipe-row">
+          <div class="recipe-num">03</div>
+          <div class="recipe-name">🧀 Cheese slice<span class="desc">Mild cheddar, individually wrapped</span></div>
+          <div class="recipe-price">$0.17</div>
+        </div>
+        <div class="recipe-row">
+          <div class="recipe-num">04</div>
+          <div class="recipe-name">🥬 Lettuce<span class="desc">Crisp romaine leaf</span></div>
+          <div class="recipe-price">$0.10</div>
+        </div>
+        <div class="recipe-row">
+          <div class="recipe-num">05</div>
+          <div class="recipe-name">🥫 Mayo &amp; mustard<span class="desc">Single-serve packets</span></div>
+          <div class="recipe-price">$0.07</div>
+        </div>
+        <div class="recipe-divider"><span>+ sides &amp; drinks</span></div>
+        <div class="recipe-row">
+          <div class="recipe-num">06</div>
+          <div class="recipe-name">🍊 Clementine<span class="desc">Fresh, hand-checked for ripeness</span></div>
+          <div class="recipe-price">$0.45</div>
+        </div>
+        <div class="recipe-row">
+          <div class="recipe-num">07</div>
+          <div class="recipe-name">🧃 Juice box<span class="desc">200 mL apple or orange</span></div>
+          <div class="recipe-price">$0.36</div>
+        </div>
+        <div class="recipe-row">
+          <div class="recipe-num">08</div>
+          <div class="recipe-name">🍫 Snack bar<span class="desc">Granola or chocolate, halal-certified</span></div>
+          <div class="recipe-price">$0.21</div>
+        </div>
+        <div class="recipe-divider"><span>+ packaging</span></div>
+        <div class="recipe-row">
+          <div class="recipe-num">09</div>
+          <div class="recipe-name">🛍️ Paper bag &amp; ziploc<span class="desc">Sammich sealed, sides bagged together</span></div>
+          <div class="recipe-price">$0.05</div>
+        </div>
+      </div>
+      <div class="recipe-total">
+        <span class="label">💰 Total / bag</span>
+        <span class="price">$2.82</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="sponsor">
+  <div class="section-head">
+    <div>
+      <div class="section-num">03 — Sponsor a run</div>
+      <h2>💸 Every bag is <span class="it">$2.82</span>.<br/>The math is simple.</h2>
+    </div>
+    <p class="section-lead">
+      Slide to see your impact. 200 bags is one full run — one shelter fed for an evening.
+    </p>
+  </div>
+  <div class="sponsor-grid">
+    <div class="calc">
+      <div class="tape tape-c" aria-hidden="true"></div>
+      <div class="calc-eyebrow">Donation calculator</div>
+      <h3>You're sponsoring <span class="it" id="calcBags">50</span> bags</h3>
+      <div class="calc-bigvalue">
+        <span class="num" id="calcTotal">$141.00</span>
+        <span class="lab">CAD total</span>
+      </div>
+      <div class="calc-slider-wrap">
+        <input type="range" min="1" max="1000" value="50" id="calcSlider" class="calc-slider" aria-label="Number of bags to sponsor" />
+        <div class="calc-slider-marks">
+          <span>1</span><span>250</span><span>500</span><span>750</span><span>1000</span>
+        </div>
+      </div>
+      <div class="calc-presets" id="calcPresets">
+        <button type="button" class="calc-preset" data-n="25">25 bags</button>
+        <button type="button" class="calc-preset on" data-n="50">50 bags</button>
+        <button type="button" class="calc-preset" data-n="100">100 bags</button>
+        <button type="button" class="calc-preset" data-n="200">200 bags</button>
+        <button type="button" class="calc-preset" data-n="500">500 bags</button>
+      </div>
+      <div style="margin-top:24px;position:relative;z-index:1">
+        <div class="calc-row"><span>Cost / bag</span><span class="v">$2.82</span></div>
+        <div class="calc-row"><span>Bags sponsored</span><span class="v" id="calcBags2">50</span></div>
+        <div class="calc-row"><span>Approx. runs covered</span><span class="v" id="calcRuns">0.25</span></div>
+      </div>
+      <div style="margin-top:28px;display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1">
+        <a href="https://www.launchgood.com/v4/campaign/ramadan_sammich_2025__distributing_meals_to_shelters_across_the_gta_1" target="_blank" rel="noopener" class="btn btn-accent">Donate via LaunchGood →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="timeline-section reveal" id="story">
+  <div class="timeline-inner">
+    <div class="section-head" style="margin-bottom:48px">
+      <div>
+        <div class="section-num">04 — Our story</div>
+        <h2>🌟 From 50 sammiches to <span class="it">thousands</span>.</h2>
+      </div>
+      <p class="section-lead">Thirteen years of weekly runs, late nights of prep, and a community that keeps showing up.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-card">
+        <div class="yr">20<span class="it">12</span></div>
+        <div class="bullet"></div>
+        <h4>The First Run</h4>
+        <p>It all started with 50 sammiches and a small group of friends with one good idea.</p>
+      </div>
+      <div class="timeline-card">
+        <div class="yr">20<span class="it">16</span></div>
+        <div class="bullet"></div>
+        <h4>Word Spreads</h4>
+        <p>Volunteers from across the GTA join in. Shelters request regular drop-offs.</p>
+      </div>
+      <div class="timeline-card">
+        <div class="yr">20<span class="it">20</span></div>
+        <div class="bullet"></div>
+        <h4>Adapt &amp; Persist</h4>
+        <p>Pandemic year. Contactless prep, masked deliveries, more meals than ever.</p>
+      </div>
+      <div class="timeline-card">
+        <div class="yr">20<span class="it">25</span></div>
+        <div class="bullet"></div>
+        <h4>Stronger Together</h4>
+        <p>200 meals every run, every week of Ramadan, across the whole region.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="form-section reveal" id="volunteer">
+  <div class="section-head">
+    <div>
+      <div class="section-num">05 — Volunteer</div>
+      <h2>🤝 Join us this <span class="it">Ramadan</span>.</h2>
+    </div>
+    <p class="section-lead">
+      Fill this out and we'll reach out with details for upcoming runs near you. Takes about a minute.
+    </p>
+  </div>
+  <form class="form-card" id="volForm" name="volunteer" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+    <input type="hidden" name="form-name" value="volunteer" />
+    <p style="display:none"><label>Don't fill this out: <input name="bot-field" /></label></p>
+    <div class="form-progress" id="formProgress">
+      <div class="form-progress-bar active"></div>
+      <div class="form-progress-bar"></div>
+      <div class="form-progress-bar"></div>
+      <div class="form-progress-bar"></div>
+    </div>
+
+    <div id="formBody">
+      <div class="form-step-label" id="formStepLabel">Step 1 of 4</div>
+
+      <div class="form-step" data-step="0">
+        <h3>What's your <span class="it">name</span>?</h3>
+        <p class="subtitle">We'll use this to greet you at the next sammich-making run.</p>
+        <div class="field-row">
+          <div class="field">
+            <label for="fn">First name</label>
+            <input id="fn" name="first_name" placeholder="e.g. Fatima" autocomplete="given-name" />
           </div>
-          <div class="calc-output">
-            <div class="calc-bags" id="calcBags">50</div>
-            <div class="calc-bags-label">Sammich Bags</div>
-            <div class="calc-total">
-              <div class="calc-total-label">Total Cost</div>
-              <div class="calc-total-amount" id="calcTotal">$141.00</div>
-            </div>
-          </div>
-          <div class="calc-donate">
-            <a href="https://www.launchgood.com/v4/campaign/ramadan_sammich_2025__distributing_meals_to_shelters_across_the_gta_1" target="_blank" class="btn btn-primary">Donate via LaunchGood →</a>
+          <div class="field">
+            <label for="ln">Last name</label>
+            <input id="ln" name="last_name" placeholder="e.g. Khan" autocomplete="family-name" />
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Our Story -->
-  <section class="section story-section" id="story">
-    <div class="story-bg-dots"></div>
-    <div class="section-inner story-inner">
-      <div class="section-label fade-up">🌙 Our Story</div>
-      <h2 class="fade-up">From 50 sammiches to <em>thousands</em></h2>
-      <div class="story-timeline fade-up">
-        <div class="timeline-card">
-          <div class="timeline-year">2012</div>
-          <h4>The First Run</h4>
-          <p>It all started with just 50 sammiches and a small group of friends wanting to make a difference.</p>
+      <div class="form-step" data-step="1" hidden>
+        <h3>How can we <span class="it">reach</span> you?</h3>
+        <p class="subtitle">We send run dates and locations a few days before each session — no spam, no other lists.</p>
+        <div class="field">
+          <label for="em">Email</label>
+          <input id="em" name="email" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email" />
         </div>
-        <div class="timeline-arrow">→</div>
-        <div class="timeline-card">
-          <div class="timeline-year">2016</div>
-          <h4>Growing Momentum</h4>
-          <p>Word spread across the GTA. More volunteers joined, more shelters reached.</p>
-        </div>
-        <div class="timeline-arrow">→</div>
-        <div class="timeline-card">
-          <div class="timeline-year">2020</div>
-          <h4>Adapting & Persisting</h4>
-          <p>Even through a pandemic, the community found safe ways to keep delivering meals.</p>
-        </div>
-        <div class="timeline-arrow">→</div>
-        <div class="timeline-card">
-          <div class="timeline-year">2025</div>
-          <h4>Stronger Than Ever</h4>
-          <p>200 meals per run with a passionate volunteer community. The mission grows.</p>
+        <div class="field">
+          <label for="ph">Phone (mobile preferred)</label>
+          <input id="ph" name="phone" type="tel" placeholder="647-555-0123" autocomplete="tel" inputmode="tel" />
+          <span class="field-hint">For day-of run logistics — meeting points, last-minute changes.</span>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Featured / Instagram -->
-  <section class="section featured-section" id="featured">
-    <div class="section-inner">
-      <div class="section-label fade-up">📸 Follow The Journey</div>
-      <h2 class="fade-up">See the <em>impact</em> in action</h2>
-      <div class="featured-grid">
-        <div class="ig-embed-wrap fade-up">
-          <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DGy1GRxx13w/" data-instgrm-version="14" style="background:#FFF; border:0; border-radius:3px; box-shadow:0 0 1px 0 rgba(0,0,0,0.5),0 1px 10px 0 rgba(0,0,0,0.15); margin:0; max-width:540px; min-width:326px; padding:0; width:calc(100% - 2px);">
-            <div style="padding:16px;">
-              <a href="https://www.instagram.com/p/DGy1GRxx13w/" style="background:#FFFFFF; line-height:0; padding:0; text-align:center; text-decoration:none; width:100%;" target="_blank">
-                <div style="display:flex; flex-direction:row; align-items:center;">
-                  <div style="background-color:#F4F4F4; border-radius:50%; height:40px; margin-right:14px; width:40px;"></div>
-                  <div style="display:flex; flex-direction:column; flex-grow:1; justify-content:center;">
-                    <div style="background-color:#F4F4F4; border-radius:4px; height:14px; margin-bottom:6px; width:100px;"></div>
-                    <div style="background-color:#F4F4F4; border-radius:4px; height:14px; width:60px;"></div>
-                  </div>
-                </div>
-                <div style="padding:19% 0;"></div>
-                <div style="display:block; height:50px; margin:0 auto 12px; width:50px;">
-                  <svg width="50px" height="50px" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g transform="translate(-511 -20)" fill="#000"><path d="M556.869 30.41c-2.19-.094-4.586-.158-6.956-.158-2.374 0-4.768.064-6.961.158C537.802 30.74 534 34.581 534 39.743v20.514C534 65.42 537.802 69.26 542.952 69.59c2.193.094 4.587.157 6.961.157 2.37 0 4.766-.063 6.956-.157C562.2 69.26 566 65.42 566 60.257V39.743c0-5.162-3.8-9.003-9.131-9.333zm-6.956 34.346c-7.757 0-14.053-6.296-14.053-14.053 0-7.757 6.296-14.053 14.053-14.053s14.053 6.296 14.053 14.053c0 7.757-6.296 14.053-14.053 14.053zm14.907-25.263c-1.812 0-3.282-1.47-3.282-3.282s1.47-3.282 3.282-3.282 3.282 1.47 3.282 3.282-1.47 3.282-3.282 3.282z"/></g></g></svg>
-                </div>
-                <div style="padding-top:8px;">
-                  <div style="color:#3897f0; font-family:Arial,sans-serif; font-size:14px; font-weight:550;">View this post on Instagram</div>
-                </div>
-              </a>
-            </div>
-          </blockquote>
-        </div>
-        <div class="featured-text fade-up">
-          <h3>Join the movement this Ramadan 🌙</h3>
-          <p>Follow us on social media to see our weekly sammich-making sessions, volunteer stories, and the smiles we're creating across the GTA's shelters.</p>
-          <p>Every share, every follow, every volunteer hour makes a real difference in someone's day.</p>
-          <div class="social-links">
-            <a href="https://www.instagram.com/ramadansammich/" target="_blank" class="social-link">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-              Instagram
-            </a>
-            <a href="https://www.facebook.com/RamadanSammich" target="_blank" class="social-link">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-              Facebook
-            </a>
+      <div class="form-step" data-step="2" hidden>
+        <h3>Where are you <span class="it">based</span>?</h3>
+        <p class="subtitle">Helps us plan future runs in places that work for our volunteer base.</p>
+        <div class="field-row">
+          <div class="field">
+            <label for="ag">Your age</label>
+            <input id="ag" name="age" type="number" min="5" max="100" placeholder="e.g. 24" inputmode="numeric" />
+          </div>
+          <div class="field">
+            <label for="rg">Region</label>
+            <select id="rg" name="region">
+              <option value="">Select region…</option>
+              <option>Toronto (Downtown / Central)</option>
+              <option>North York</option>
+              <option>Scarborough</option>
+              <option>Etobicoke</option>
+              <option>Mississauga</option>
+              <option>Brampton</option>
+              <option>Markham / Richmond Hill</option>
+              <option>Vaughan / Woodbridge</option>
+              <option>Oakville / Burlington</option>
+              <option>Ajax / Pickering / Durham</option>
+              <option>Other GTA</option>
+            </select>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- Volunteer Form -->
-  <section class="section volunteer-section" id="volunteer">
-    <div class="section-inner">
-      <div class="section-label fade-up">✋ Volunteer Sign-Up</div>
-      <h2 class="fade-up">Join us this <em>Ramadan</em></h2>
-      <div class="volunteer-form-wrap fade-up">
-        <p class="form-intro">We'd love to have you on the team! Fill out the form below and we'll be in touch with details about upcoming sammich-making runs near you.</p>
+      <div class="form-step" data-step="3" hidden>
+        <h3>Solo or with <span class="it">family</span>?</h3>
+        <p class="subtitle">Some of our best runs happen with parents and kids together. Pick what fits.</p>
+        <input type="hidden" id="signupType" name="signup_type" value="" />
+        <div class="radio-stack" id="signupRadios">
+          <button type="button" class="radio-card" data-val="Individual">
+            <span class="ring"></span>
+            <span>
+              <span class="label">Just me</span>
+              <span class="desc">I'll come solo — happy to be paired with a team.</span>
+            </span>
+          </button>
+          <button type="button" class="radio-card" data-val="Family">
+            <span class="ring"></span>
+            <span>
+              <span class="label">With my family</span>
+              <span class="desc">Bringing 2 or more household members of any age.</span>
+            </span>
+          </button>
+        </div>
+      </div>
 
-        <form name="volunteer" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="volunteer">
-          <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
-
-          <!-- Name row -->
-          <div class="form-row">
-            <div class="form-group">
-              <label for="first_name">First Name <span class="req">*</span></label>
-              <input type="text" id="first_name" name="first_name" placeholder="e.g. Fatima" required>
-            </div>
-            <div class="form-group">
-              <label for="last_name">Last Name <span class="req">*</span></label>
-              <input type="text" id="last_name" name="last_name" placeholder="e.g. Khan" required>
-            </div>
-          </div>
-
-          <!-- Contact row -->
-          <div class="form-row">
-            <div class="form-group">
-              <label for="email">Email <span class="req">*</span></label>
-              <input type="email" id="email" name="email" placeholder="you@example.com" required>
-            </div>
-            <div class="form-group">
-              <label for="phone">Phone Number <span class="req">*</span></label>
-              <input type="tel" id="phone" name="phone" placeholder="e.g. 647-555-0123" required>
-              <span class="field-hint">Preferably a cell phone number that we can reach you at.</span>
-            </div>
-          </div>
-
-          <!-- Demographic divider -->
-          <div class="form-divider">
-            <h3>📋 Demographic Info</h3>
-            <p>The following information helps us plan future runs in a way that is accessible to all of our volunteer base.</p>
-          </div>
-
-          <!-- Age + Region row -->
-          <div class="form-row">
-            <div class="form-group">
-              <label for="age">Your Age <span class="req">*</span></label>
-              <input type="number" id="age" name="age" placeholder="e.g. 24" min="5" max="100" required>
-            </div>
-            <div class="form-group">
-              <label for="region">Region of Residence <span class="req">*</span></label>
-              <select id="region" name="region" required>
-                <option value="" disabled selected>Select your region</option>
-                <option>Toronto (Downtown / Central)</option>
-                <option>North York</option>
-                <option>Scarborough</option>
-                <option>Etobicoke</option>
-                <option>Mississauga</option>
-                <option>Brampton</option>
-                <option>Markham / Richmond Hill</option>
-                <option>Vaughan / Woodbridge</option>
-                <option>Oakville / Burlington</option>
-                <option>Ajax / Pickering / Durham</option>
-                <option>Other GTA</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Sign-up type -->
-          <div class="form-group">
-            <label>Are you signing up as an individual or for your family? <span class="req">*</span></label>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="signup_type" value="Individual" required>
-                <span>Individual</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="signup_type" value="Family">
-                <span>Signing up for my family</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="form-submit">
-            <button type="submit" class="btn btn-submit">🥪 Submit — I'm In!</button>
-          </div>
-        </form>
+      <div class="form-nav">
+        <button type="button" class="btn btn-back" id="formBack" style="visibility:hidden">← Back</button>
+        <button type="button" class="btn btn-primary" id="formNext">Continue →</button>
+        <button type="submit" class="btn btn-accent" id="formSubmit" hidden>Submit — I'm in</button>
       </div>
     </div>
-  </section>
 
-  <!-- Final CTA -->
-  <section class="cta-section">
-    <div class="cta-doodles"></div>
-    <div class="cta-inner">
-      <h2 class="fade-up">Help us make a difference <em>this&nbsp;Ramadan</em> 🤲</h2>
-      <p class="fade-up">Whether you volunteer your time or contribute to our supply fund, every bit helps us deliver more meals to those who need them most.</p>
-      <div class="cta-buttons fade-up">
-        <a href="#volunteer" class="btn btn-cta-primary">✋ Volunteer</a>
-        <a href="https://www.launchgood.com/v4/campaign/ramadan_sammich_2025__distributing_meals_to_shelters_across_the_gta_1" target="_blank" class="btn btn-cta-outline">Donate via LaunchGood</a>
-        <a href="https://www.paypal.com/paypalme/MuneebChaudhary?fbclid=PAZXh0bgNhZW0CMTEAAaaiukGgJ0Q1-8jTU7b2w13dne6kriFzpnHJ0bHl-sTzsYCgJ6gFgw0O2KU_aem_zdW4Crn4gY4inMLSCfWCKA" target="_blank" class="btn btn-cta-outline">Donate via PayPal</a>
+    <div class="form-success" id="formSuccess" hidden>
+      <div class="form-success-icon">✓</div>
+      <h3>You're <span class="it" style="color:var(--accent)">in</span>, <span id="successName">friend</span>.</h3>
+      <p>We'll email you within a few days with details about the next sammich-making run in your area. Thanks for joining the team.</p>
+      <button class="btn btn-ghost" type="button" id="formReset">Sign up someone else</button>
+    </div>
+  </form>
+</section>
+
+<section class="follow-section reveal">
+  <div class="follow-grid">
+    <div class="polaroid-stack">
+      <div class="polaroid p1" data-cap="Run #4 · Mississauga">
+        <div class="polaroid-img pimg-1"><span class="pimg-marker">SAMMICH PREP</span></div>
+      </div>
+      <div class="polaroid p2" data-cap="Volunteer crew">
+        <div class="polaroid-img pimg-2"><span class="pimg-marker">TEAM PHOTO</span></div>
+      </div>
+      <div class="polaroid p3" data-cap="200 bags packed">
+        <div class="polaroid-img pimg-3"><span class="pimg-marker">DELIVERY DAY</span></div>
       </div>
     </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-logo"><img src="logo.png" alt="Ramadan Sammich"></div>
-      <div class="footer-links">
-        <a href="https://www.instagram.com/ramadansammich/" target="_blank">Instagram</a>
-        <a href="https://www.facebook.com/RamadanSammich" target="_blank">Facebook</a>
-        <a href="#volunteer">Volunteer</a>
-        <a href="https://www.launchgood.com/v4/campaign/ramadan_sammich_2025__distributing_meals_to_shelters_across_the_gta_1" target="_blank">LaunchGood</a>
-        <a href="https://www.paypal.com/paypalme/MuneebChaudhary" target="_blank">PayPal</a>
+    <div class="follow-text">
+      <div class="section-num">06 — Follow along</div>
+      <h2>📸 See the impact <span class="it">in&nbsp;motion</span>.</h2>
+      <p>Weekly prep sessions, volunteer stories, the smiles from shelters across the GTA — it all lives on Instagram and Facebook.</p>
+      <p>Every share helps us reach more volunteers. Every follow brings the next person into the fold.</p>
+      <div class="social-row">
+        <a href="https://www.instagram.com/ramadansammich/" target="_blank" rel="noopener" class="social-pill" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          @ramadansammich
+        </a>
+        <a href="https://www.facebook.com/RamadanSammich" target="_blank" rel="noopener" class="social-pill" aria-label="Facebook">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          Facebook
+        </a>
       </div>
-      <p class="footer-copy">© 2025 Ramadan Sammich. Feeding the GTA with love since 2012. 🥪💛</p>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script async defer src="https://www.instagram.com/embed.js"></script>
-  <script>
-    // Nav
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
-    const toggle = document.getElementById('navToggle');
-    const links = document.getElementById('navLinks');
-    toggle.addEventListener('click', () => links.classList.toggle('open'));
-    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+<section class="cta-section reveal">
+  <div class="cta-inner">
+    <h2>💛 Help us make a difference <span class="it">this Ramadan.</span></h2>
+    <p>Whether you volunteer your time or contribute to the supply fund — every bit gets a meal to someone who needs it.</p>
+    <div class="cta-buttons">
+      <a href="#volunteer" class="btn btn-primary">Volunteer</a>
+      <a href="https://www.launchgood.com/v4/campaign/ramadan_sammich_2025__distributing_meals_to_shelters_across_the_gta_1" target="_blank" rel="noopener" class="btn btn-ghost">Donate via LaunchGood</a>
+      <a href="https://www.paypal.com/paypalme/MuneebChaudhary" target="_blank" rel="noopener" class="btn btn-ghost">Donate via PayPal</a>
+    </div>
+  </div>
+</section>
 
-    // Scroll animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const siblings = entry.target.parentElement.querySelectorAll('.fade-up');
-          const idx = Array.from(siblings).indexOf(entry.target);
-          entry.target.style.transitionDelay = `${idx * 0.12}s`;
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="icon.png" alt="" width="40" height="40" loading="lazy" />
+        <span class="wm">Ramadan <em>Sammich</em></span>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Get involved</h5>
+          <a href="#volunteer">🙌 Volunteer</a>
+          <a href="https://www.launchgood.com/v4/campaign/ramadan_sammich_2025__distributing_meals_to_shelters_across_the_gta_1" target="_blank" rel="noopener">💝 Sponsor a run</a>
+          <a href="https://www.launchgood.com/v4/campaign/ramadan_sammich_2025__distributing_meals_to_shelters_across_the_gta_1" target="_blank" rel="noopener">🎁 Donate</a>
+        </div>
+        <div class="footer-col">
+          <h5>Follow</h5>
+          <a href="https://www.instagram.com/ramadansammich/" target="_blank" rel="noopener">📸 Instagram</a>
+          <a href="https://www.facebook.com/RamadanSammich" target="_blank" rel="noopener">👍 Facebook</a>
+        </div>
+        <div class="footer-col">
+          <h5>About</h5>
+          <a href="#about">✨ What we do</a>
+          <a href="#story">📖 Our story</a>
+          <a href="#sponsor">💰 Cost breakdown</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Ramadan Sammich · Feeding the GTA since 2012. 💛</span>
+      <span class="mono">Built with care · ramadansammich.ca</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  // Nav scroll state
+  var nav = document.getElementById('nav');
+  var onScroll = function(){
+    if (window.scrollY > 30) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile menu
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.addEventListener('click', function(e){
+    if (e.target.tagName === 'A' && window.innerWidth <= 860) {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Reveal on scroll
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+  }
 
-    // Sammich calculator
-    const COST_PER_BAG = 2.82;
-    const slider = document.getElementById('sammichSlider');
-    const bagsDisplay = document.getElementById('calcBags');
-    const totalDisplay = document.getElementById('calcTotal');
-
-    slider.addEventListener('input', () => {
-      const bags = parseInt(slider.value);
-      bagsDisplay.textContent = bags.toLocaleString();
-      totalDisplay.textContent = '$' + (bags * COST_PER_BAG).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  // Sponsor calculator
+  var COST = 2.82, MEALS_PER_RUN = 200;
+  var slider = document.getElementById('calcSlider');
+  var bagsEl = document.getElementById('calcBags');
+  var bags2El = document.getElementById('calcBags2');
+  var totalEl = document.getElementById('calcTotal');
+  var runsEl = document.getElementById('calcRuns');
+  var presets = document.getElementById('calcPresets');
+  var fmt = function(n){ return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); };
+  var update = function(n){
+    bagsEl.textContent = fmt(n);
+    bags2El.textContent = fmt(n);
+    var total = n * COST;
+    totalEl.textContent = '$' + total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    runsEl.textContent = (n / MEALS_PER_RUN).toFixed(n < MEALS_PER_RUN ? 2 : 1);
+    Array.prototype.forEach.call(presets.querySelectorAll('.calc-preset'), function(b){
+      b.classList.toggle('on', parseInt(b.dataset.n, 10) === n);
     });
+  };
+  slider.addEventListener('input', function(){ update(parseInt(slider.value, 10)); });
+  presets.addEventListener('click', function(e){
+    var t = e.target.closest('.calc-preset');
+    if (!t) return;
+    var n = parseInt(t.dataset.n, 10);
+    slider.value = n;
+    update(n);
+  });
+  update(50);
 
-    // Scroll progress bar
-    const progressBar = document.getElementById('scrollProgress');
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      progressBar.style.width = (scrollTop / docHeight * 100) + '%';
-    }, { passive: true });
+  // Volunteer multi-step form
+  var step = 0, TOTAL = 4;
+  var form = document.getElementById('volForm');
+  var steps = form.querySelectorAll('.form-step');
+  var bars = document.querySelectorAll('.form-progress-bar');
+  var stepLabel = document.getElementById('formStepLabel');
+  var btnBack = document.getElementById('formBack');
+  var btnNext = document.getElementById('formNext');
+  var btnSubmit = document.getElementById('formSubmit');
+  var formBody = document.getElementById('formBody');
+  var formSuccess = document.getElementById('formSuccess');
+  var successName = document.getElementById('successName');
 
-    // Count-up animation for hero stats
-    function animateCount(el, target, suffix = '') {
-      const isNumber = !isNaN(parseInt(target));
-      if (!isNumber) return;
-      const num = parseInt(target);
-      const duration = 1800;
-      const start = performance.now();
-      function update(now) {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.round(num * eased).toLocaleString() + suffix;
-        if (progress < 1) requestAnimationFrame(update);
-      }
-      requestAnimationFrame(update);
-    }
-    const statObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const h3 = entry.target.querySelector('h3');
-          const raw = h3.textContent.trim();
-          const match = raw.match(/^(\d+)(.*)/);
-          if (match) {
-            h3.textContent = '0' + match[2];
-            animateCount(h3, match[1], match[2]);
-          }
-          statObserver.unobserve(entry.target);
-        }
+  var fields = {
+    first_name: document.getElementById('fn'),
+    last_name:  document.getElementById('ln'),
+    email:      document.getElementById('em'),
+    phone:      document.getElementById('ph'),
+    age:        document.getElementById('ag'),
+    region:     document.getElementById('rg'),
+    signup_type:document.getElementById('signupType')
+  };
+
+  var canNext = function(){
+    if (step === 0) return fields.first_name.value.trim() && fields.last_name.value.trim();
+    if (step === 1) return /\S+@\S+\.\S+/.test(fields.email.value) && fields.phone.value.trim().length >= 7;
+    if (step === 2) return fields.age.value && parseInt(fields.age.value, 10) >= 5 && fields.region.value;
+    if (step === 3) return !!fields.signup_type.value;
+    return true;
+  };
+
+  var render = function(){
+    steps.forEach(function(s, i){ s.hidden = i !== step; });
+    bars.forEach(function(b, i){
+      b.classList.toggle('done', i < step);
+      b.classList.toggle('active', i === step);
+    });
+    stepLabel.textContent = 'Step ' + (step + 1) + ' of ' + TOTAL;
+    btnBack.style.visibility = step === 0 ? 'hidden' : 'visible';
+    var last = step === TOTAL - 1;
+    btnNext.hidden = last;
+    btnSubmit.hidden = !last;
+    var ok = canNext();
+    btnNext.disabled = !ok;
+    btnSubmit.disabled = !ok;
+    var firstInput = steps[step].querySelector('input, select');
+    if (firstInput && step !== 3) try { firstInput.focus({ preventScroll: true }); } catch(e){}
+  };
+
+  Object.keys(fields).forEach(function(k){
+    var el = fields[k];
+    if (!el) return;
+    el.addEventListener('input', render);
+    el.addEventListener('change', render);
+  });
+
+  document.getElementById('signupRadios').addEventListener('click', function(e){
+    var b = e.target.closest('.radio-card');
+    if (!b) return;
+    fields.signup_type.value = b.dataset.val;
+    document.querySelectorAll('#signupRadios .radio-card').forEach(function(c){
+      c.classList.toggle('on', c === b);
+    });
+    render();
+  });
+
+  btnNext.addEventListener('click', function(){
+    if (!canNext()) return;
+    step = Math.min(TOTAL - 1, step + 1);
+    render();
+  });
+  btnBack.addEventListener('click', function(){
+    step = Math.max(0, step - 1);
+    render();
+  });
+
+  form.addEventListener('submit', function(e){
+    if (!canNext()) { e.preventDefault(); return; }
+    e.preventDefault();
+    var body = new URLSearchParams();
+    body.append('form-name', 'volunteer');
+    Object.keys(fields).forEach(function(k){ body.append(k, fields[k].value); });
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() })
+      .catch(function(){})
+      .finally(function(){
+        successName.textContent = fields.first_name.value || 'friend';
+        formBody.hidden = true;
+        formSuccess.hidden = false;
       });
-    }, { threshold: 0.5 });
-    document.querySelectorAll('.hero-stat').forEach(s => statObserver.observe(s));
+  });
 
-    // Parallax-lite on hero doodles
-    const doodles = document.querySelector('.hero-doodles');
-    if (doodles) {
-      window.addEventListener('scroll', () => {
-        const y = window.scrollY;
-        if (y < window.innerHeight) {
-          doodles.style.transform = 'translateY(' + (y * 0.3) + 'px)';
-        }
-      }, { passive: true });
-    }
-  </script>
+  document.getElementById('formReset').addEventListener('click', function(){
+    Object.keys(fields).forEach(function(k){ fields[k].value = ''; });
+    document.querySelectorAll('#signupRadios .radio-card').forEach(function(c){ c.classList.remove('on'); });
+    step = 0;
+    formSuccess.hidden = true;
+    formBody.hidden = false;
+    render();
+  });
+
+  render();
+})();
+</script>
 </body>
 </html>
