@@ -11,7 +11,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://ramadansammich.ca" />
 <meta property="og:image" content="https://ramadansammich.ca/icon.png" />
-<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Ramadan Sammich" />
 <meta name="twitter:description" content="Distributing sammiches to shelters across the GTA every Ramadan since 2012." />
 <meta name="twitter:image" content="https://ramadansammich.ca/icon.png" />
@@ -21,7 +21,7 @@
 <link rel="preload" as="image" href="logo.png" fetchpriority="high" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   :root {
     /* surface */
@@ -561,6 +561,7 @@
   .btn-back:hover { border-color: var(--ink); color: var(--ink); transform: translateX(-2px); }
   .btn[disabled] { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
 
+  .form-error { margin-top: 16px; color: var(--accent); font-size: 15px; text-align: center; }
   .form-success { text-align: center; padding: 32px 16px; }
   .form-success-icon {
     width: 72px; height: 72px; border-radius: 50%; background: var(--accent-3);
@@ -740,7 +741,7 @@
 
 <nav class="nav" id="nav">
   <a href="#" class="nav-brand" aria-label="Ramadan Sammich home">
-    <img src="icon.png" alt="" width="36" height="36" />
+    <img src="icon-96.png" alt="" width="36" height="36" />
     <span class="wm">Ramadan <em>Sammich</em></span>
   </a>
   <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
@@ -768,13 +769,13 @@
     <p class="hero-sub">
       A community-driven initiative that assembles and delivers meals to local
       shelters every Ramadan. ✨ Volunteers gather weekly, hands move fast, and
-      200 meals leave every run. We've been doing this for thirteen years. 💛
+      200 meals leave every run. We've been doing this every Ramadan since 2012. 💛
     </p>
     <div class="hero-cta">
       <a href="#volunteer" class="btn btn-primary">🙌 Volunteer with us →</a>
       <a href="https://www.launchgood.com/v4/campaign/ramadan_sammich_2025__distributing_meals_to_shelters_across_the_gta_1" target="_blank" rel="noopener" class="btn btn-ghost">💝 Sponsor a run</a>
       <div class="sticker hero-sticker" aria-hidden="true">
-        13&nbsp;years<br/>of&nbsp;love&nbsp;💛
+        Since&nbsp;2012<br/>with&nbsp;love&nbsp;💛
       </div>
     </div>
   </div>
@@ -784,7 +785,7 @@
     <div class="hero-logo-frame">
       <div class="stack-tag">🥪 Spec · 001</div>
       <div class="stack-tag-r">$2.87 / unit</div>
-      <img src="logo.png" alt="Ramadan Sammich logo" class="hero-logo-img" width="3588" height="1504" loading="eager" fetchpriority="high" />
+      <img src="logo.webp" alt="Ramadan Sammich logo" class="hero-logo-img" width="1200" height="503" loading="eager" fetchpriority="high" />
       <div class="stack-stat">
         <span>🌙 Halal · Made with love</span>
         <span>📍 GTA</span>
@@ -818,7 +819,7 @@
       <div class="section-num">01 — What we do</div>
       <h2 style="margin-bottom:28px">Assembling meals.<br /><span class="it">Building community.</span> 💛</h2>
       <p class="about-text">
-        A bag of food is small. <span class="accent">A bag of food shows up every week, for thirteen years</span>, and it becomes something else entirely — a habit of care 🤲, a piece of a community, a way of belonging to your city.
+        A bag of food is small. <span class="accent">A bag of food shows up every week, every Ramadan since 2012</span>, and it becomes something else entirely — a habit of care 🤲, a piece of a community, a way of belonging to your city.
       </p>
       <div class="how-steps">
         <div class="how-step">
@@ -1083,6 +1084,7 @@
         <button type="button" class="btn btn-primary" id="formNext">Continue →</button>
         <button type="submit" class="btn btn-accent" id="formSubmit" hidden>Submit — I'm in</button>
       </div>
+      <p class="form-error" id="formError" role="alert" hidden>Something went wrong sending your signup. Please try again, or message us on Instagram.</p>
     </div>
 
     <div class="form-success" id="formSuccess" hidden>
@@ -1152,7 +1154,7 @@
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="icon.png" alt="" width="40" height="40" loading="lazy" />
+        <img src="icon-96.png" alt="" width="40" height="40" loading="lazy" />
         <span class="wm">Ramadan <em>Sammich</em></span>
       </div>
       <div class="footer-cols">
@@ -1335,13 +1337,19 @@
     var body = new URLSearchParams();
     body.append('form-name', 'volunteer');
     Object.keys(fields).forEach(function(k){ body.append(k, fields[k].value); });
+    var submitBtn = document.getElementById('formSubmit');
+    var formError = document.getElementById('formError');
+    submitBtn.disabled = true;
+    formError.hidden = true;
     fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() })
-      .catch(function(){})
-      .finally(function(){
+      .then(function(res){
+        if (!res.ok) throw new Error('HTTP ' + res.status);
         successName.textContent = fields.first_name.value || 'friend';
         formBody.hidden = true;
         formSuccess.hidden = false;
-      });
+      })
+      .catch(function(){ formError.hidden = false; })
+      .finally(function(){ submitBtn.disabled = false; });
   });
 
   document.getElementById('formReset').addEventListener('click', function(){
